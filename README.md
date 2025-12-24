@@ -21,4 +21,6 @@ gameplay session by clearing lines. The more lines cleared at once, the higher
 the score for a line clear. Clearing four lines at once using an I- shaped
 tetromino is referred to as a "Tetris".
 
-![Tetris](imgs/tetris.png)
+<p align="center">
+  <img src="imgs/tetris.png"/>
+</p>

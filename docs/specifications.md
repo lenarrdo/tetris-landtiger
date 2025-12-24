@@ -29,7 +29,10 @@ The display of the LandTiger should show:
 - **Tetrominoes**:
   - [ ] tetrominoes are composed of 4 blocks arranged in various shapes.
   - [ ] each block occupies the space of a square in the playing field grid.
-  - [ ] each ![tetromino](../imgs/tetrominoes.png) must be implemented as a global variable.
+  - [ ] each tetromino must be implemented as a global variable.
+  <p align="center">
+    <img src="../imgs/tetrominoes.png"/>
+  </p>
 
 - **Tetromino Generation**:
   - [ ] at the beginning of the game, a random tetromino appears on the top of the playing field;
