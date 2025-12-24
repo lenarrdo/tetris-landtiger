@@ -53,3 +53,8 @@ dkms.conf
 
 # debug information files
 *.dwo
+
+# Keil
+src/Listings/*
+src/Objects/*
+src/sample.uvguix.*
