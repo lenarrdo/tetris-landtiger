@@ -20,20 +20,16 @@
 **
 *********************************************************************************************************/
 
-/* Includes ------------------------------------------------------------------*/
 #include "../GLCD/GLCD.h"
 #include "../TouchPanel/TouchPanel.h"
 
-/* Private variables ---------------------------------------------------------*/
 Matrix matrix;
 Coordinate display;
 
-/* Display Sample */
 Coordinate ScreenSample[3];
-/* LCD Sample */
+
 Coordinate DisplaySample[3] = { { 45, 45 }, { 45, 270 }, { 190, 190 } };
 
-/* Private define ------------------------------------------------------------*/
 #define THRESHOLD 2
 
 /*******************************************************************************
@@ -42,7 +38,7 @@ Coordinate DisplaySample[3] = { { 45, 45 }, { 45, 270 }, { 190, 190 } };
 * Input          : - speed: speed
 * Output         : None
 * Return         : None
-* Attention		 : None
+* Attention      : None
 *******************************************************************************/
 void LPC17xx_SPI_SetSpeed(uint8_t speed)
 {
@@ -59,7 +55,7 @@ void LPC17xx_SPI_SetSpeed(uint8_t speed)
 * Input          : None
 * Output         : None
 * Return         : None
-* Attention		 : None
+* Attention      : None
 *******************************************************************************/
 static void ADS7843_SPI_Init(void)
 {
@@ -122,9 +118,8 @@ static void DelayUS(uint32_t cnt)
 {
 	uint32_t i;
 	for (i = 0; i < cnt; i++) {
-		uint8_t us = 12; /* 设置值为12，大约延1微秒 */
-		while (us--) /* 延1微秒	*/
-		{
+		uint8_t us = 12;
+		while (us--) {
 			;
 		}
 	}
@@ -519,6 +514,5 @@ void TouchPanel_Calibrate(void)
 		ScreenSample[i].y = Ptr->y;
 		DeleteCross(DisplaySample[i].x, DisplaySample[i].y);
 	}
-	setCalibrationMatrix(&DisplaySample[0], &ScreenSample[0],
-			     &matrix); /* 送入值得到参数 */
+	setCalibrationMatrix(&DisplaySample[0], &ScreenSample[0], &matrix);
 }
