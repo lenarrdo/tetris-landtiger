@@ -74,6 +74,7 @@
 #define Blue 0x001F
 #define Blue2 0x051F
 #define Red 0xF800
+#define Orange 0xFD20
 #define Magenta 0xF81F
 #define Green 0x07E0
 #define Cyan 0x7FFF

@@ -615,6 +615,21 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>tetromino</GroupName>
+          <Files>
+            <File>
+              <FileName>tetromino.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\tetromino\tetromino.c</FilePath>
+            </File>
+            <File>
+              <FileName>tetromino.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\tetromino\tetromino.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>::CMSIS</GroupName>
         </Group>
       </Groups>
@@ -943,7 +958,7 @@
             <uC99>0</uC99>
             <uGnu>0</uGnu>
             <useXO>0</useXO>
-            <v6Lang>1</v6Lang>
+            <v6Lang>5</v6Lang>
             <v6LangP>3</v6LangP>
             <vShortEn>1</vShortEn>
             <vShortWch>1</vShortWch>
@@ -1173,6 +1188,21 @@
               <FileName>mpu_armv7.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Source\CMSIS_core\mpu_armv7.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>tetromino</GroupName>
+          <Files>
+            <File>
+              <FileName>tetromino.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\tetromino\tetromino.c</FilePath>
+            </File>
+            <File>
+              <FileName>tetromino.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\tetromino\tetromino.h</FilePath>
             </File>
           </Files>
         </Group>

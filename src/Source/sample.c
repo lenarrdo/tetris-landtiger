@@ -1,28 +1,7 @@
-/******************************* Copyright (c) *******************************
-**                                                                          **
-**                          http://www.powermcu.com                         **
-**                                                                          **
-**--------------File Info---------------------------------------------------**
-** File name:               main.c                                          **
-** Descriptions:            The GLCD application function                   **
-**                                                                          **
-**--------------------------------------------------------------------------**
-** Created by:              AVRman                                          **
-** Created date:            2010-11-7                                       **
-** Version:                 v1.0                                            **
-** Descriptions:            The original version                            **
-**                                                                          **
-**--------------------------------------------------------------------------**
-** Modified by:             Paolo Bernardi                                  **
-** Modified date:           03/01/2020                                      **
-** Version:                 v2.0                                            **
-** Descriptions:            basic program for LCD and Touch Panel teaching  **
-**                                                                          **
-******************************************************************************/
-
 #include "LPC17xx.h"
 #include "GLCD/GLCD.h"
 #include "TouchPanel/TouchPanel.h"
+#include "./tetromino/tetromino.h"
 
 // ScaleFlag needs to visible in order for the emulator to find the symbol (can
 // be placed also inside system_LPC17xx.h but since it is RO, it needs more
@@ -36,11 +15,21 @@ int main(void)
 	SystemInit();
 	LCD_Initialization();
 	TP_Init();
-	TouchPanel_Calibrate();
-
+	// TouchPanel_Calibrate();
 	LCD_Clear(Black);
-	GUI_Text(0, 280, "Touch here: 1 sec to clear.", Red, White);
-	// LCD_DrawLine(0, 0, 200, 200, White);
+
+	// GUI_Text(0, 280, (uint8_t *)"Touch here: 1 sec to clear.", Red, White);
+	// LCD_DrawLine(160, 160, 200, 200, White);
+	// LCD_SetPoint(10, 10, White);
+	tetromino_draw(tetromino_create(I_TYPE, (struct square){ 0, 19 }));
+	tetromino_draw(tetromino_create(O_TYPE, (struct square){ 0, 17 }));
+	tetromino_draw(tetromino_create(T_TYPE, (struct square){ 3, 18 }));
+	tetromino_draw(tetromino_create(S_TYPE, (struct square){ 5, 18 }));
+	tetromino_draw(tetromino_create(Z_TYPE, (struct square){ 5, 16 }));
+	tetromino_draw(tetromino_create(J_TYPE, (struct square){ 7, 17 }));
+	tetromino_draw(tetromino_create(L_TYPE, (struct square){ 0, 14 }));
+
+	// free(O);
 
 	// power-down mode
 	LPC_SC->PCON |= 0x1;

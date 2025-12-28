@@ -1,0 +1,42 @@
+#ifndef TETROMINO_H_
+#define TETROMINO_H_
+
+#include "../GLCD/GLCD.h"
+
+#define BLOCK_LEN 16 // pixels
+
+enum tetromino_type {
+	I_TYPE,
+	O_TYPE,
+	T_TYPE,
+	J_TYPE,
+	L_TYPE,
+	S_TYPE,
+	Z_TYPE,
+};
+
+enum tetromino_color {
+	I_COLOR = Cyan,
+	O_COLOR = Yellow,
+	T_COLOR = Magenta,
+	J_COLOR = Blue,
+	L_COLOR = Orange,
+	S_COLOR = Green,
+	Z_COLOR = Red,
+};
+
+struct square {
+	int x;
+	int y;
+};
+
+struct tetromino {
+	struct square squares[4];
+	enum tetromino_type type;
+};
+
+struct tetromino tetromino_create(enum tetromino_type type,
+				  struct square position);
+void tetromino_draw(struct tetromino tetromino);
+
+#endif // TETROMINO_H_
