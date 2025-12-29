@@ -630,6 +630,21 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>playing_field</GroupName>
+          <Files>
+            <File>
+              <FileName>playing_field.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\playing_field\playing_field.c</FilePath>
+            </File>
+            <File>
+              <FileName>playing_field.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\playing_field\playing_field.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>::CMSIS</GroupName>
         </Group>
       </Groups>
@@ -1203,6 +1218,21 @@
               <FileName>tetromino.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Source\tetromino\tetromino.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>playing_field</GroupName>
+          <Files>
+            <File>
+              <FileName>playing_field.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\playing_field\playing_field.c</FilePath>
+            </File>
+            <File>
+              <FileName>playing_field.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\playing_field\playing_field.h</FilePath>
             </File>
           </Files>
         </Group>
