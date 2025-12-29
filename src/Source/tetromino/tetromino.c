@@ -126,6 +126,23 @@ void tetromino_move_right(struct tetromino *tetromino)
 		tetromino->squares[i].x += 1;
 }
 
+void tetromino_rotate_clockwise(struct tetromino *tetromino)
+{
+	if (tetromino->type == O_TYPE)
+		return;
+
+	struct square pivot = { tetromino->squares[2].x,
+				tetromino->squares[2].y };
+
+	for (int i = 0; i < 4; i++) {
+		int dx = tetromino->squares[i].x - pivot.x;
+		int dy = tetromino->squares[i].y - pivot.y;
+
+		tetromino->squares[i].x = -dy + pivot.x;
+		tetromino->squares[i].y = +dx + pivot.y;
+	}
+}
+
 /********************
  * HELPER FUNCTIONS *
  ********************/

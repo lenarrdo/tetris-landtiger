@@ -47,5 +47,6 @@ void tetromino_draw(struct tetromino tetromino);
 // movement
 void tetromino_move_left(struct tetromino *tetromino);
 void tetromino_move_right(struct tetromino *tetromino);
+void tetromino_rotate_clockwise(struct tetromino *tetromino);
 
 #endif // TETROMINO_H_
