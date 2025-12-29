@@ -18,7 +18,10 @@ void draw_playing_field(void)
 		(struct pixel){ 0, MAX_Y - HORIZONTAL_BORDER_WIDTH }, MAX_X);
 
 	draw_vertical_wall((struct pixel){ 0, 0 }, MAX_Y);
-	draw_vertical_wall((struct pixel){ PLAYING_FIELD_WIDTH + 1, 0 }, MAX_Y);
+	draw_vertical_wall(
+		(struct pixel){ VERTICAL_BORDER_WIDTH + PLAYING_FIELD_WIDTH,
+				0 },
+		MAX_Y);
 	draw_vertical_wall((struct pixel){ MAX_X - VERTICAL_BORDER_WIDTH, 0 },
 			   MAX_Y);
 
