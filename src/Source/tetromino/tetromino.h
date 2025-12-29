@@ -33,6 +33,7 @@ struct square {
 struct tetromino {
 	struct square squares[4];
 	enum tetromino_type type;
+	enum tetromino_color color;
 };
 
 struct tetromino tetromino_create(enum tetromino_type type,
