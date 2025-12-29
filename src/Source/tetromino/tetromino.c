@@ -37,37 +37,37 @@ struct tetromino tetromino_create(enum tetromino_type type,
 		break;
 	case T_TYPE:
 		new_tetromino.squares[0] =
-			(struct square){ position.x, position.y };
-		new_tetromino.squares[1] =
 			(struct square){ position.x + 1, position.y };
+		new_tetromino.squares[1] =
+			(struct square){ position.x, position.y + 1 };
 		new_tetromino.squares[2] =
-			(struct square){ position.x + 2, position.y };
-		new_tetromino.squares[3] =
 			(struct square){ position.x + 1, position.y + 1 };
+		new_tetromino.squares[3] =
+			(struct square){ position.x + 2, position.y + 1 };
 
 		new_tetromino.color = T_COLOR;
 		break;
 	case J_TYPE:
 		new_tetromino.squares[0] =
-			(struct square){ position.x + 1, position.y };
+			(struct square){ position.x, position.y };
 		new_tetromino.squares[1] =
-			(struct square){ position.x + 1, position.y + 1 };
+			(struct square){ position.x, position.y + 1 };
 		new_tetromino.squares[2] =
-			(struct square){ position.x + 1, position.y + 2 };
+			(struct square){ position.x + 1, position.y + 1 };
 		new_tetromino.squares[3] =
-			(struct square){ position.x, position.y + 2 };
+			(struct square){ position.x + 2, position.y + 1 };
 
 		new_tetromino.color = J_COLOR;
 		break;
 	case L_TYPE:
 		new_tetromino.squares[0] =
-			(struct square){ position.x, position.y };
+			(struct square){ position.x + 2, position.y };
 		new_tetromino.squares[1] =
 			(struct square){ position.x, position.y + 1 };
 		new_tetromino.squares[2] =
-			(struct square){ position.x, position.y + 2 };
+			(struct square){ position.x + 1, position.y + 1 };
 		new_tetromino.squares[3] =
-			(struct square){ position.x + 1, position.y + 2 };
+			(struct square){ position.x + 2, position.y + 1 };
 
 		new_tetromino.color = L_COLOR;
 		break;
@@ -77,9 +77,9 @@ struct tetromino tetromino_create(enum tetromino_type type,
 		new_tetromino.squares[1] =
 			(struct square){ position.x + 2, position.y };
 		new_tetromino.squares[2] =
-			(struct square){ position.x, position.y + 1 };
-		new_tetromino.squares[3] =
 			(struct square){ position.x + 1, position.y + 1 };
+		new_tetromino.squares[3] =
+			(struct square){ position.x, position.y + 1 };
 
 		new_tetromino.color = S_COLOR;
 		break;
