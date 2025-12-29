@@ -37,8 +37,15 @@ struct tetromino {
 	enum tetromino_color color;
 };
 
+// creation
 struct tetromino tetromino_create(enum tetromino_type type,
 				  struct square position);
+
+// visualization
 void tetromino_draw(struct tetromino tetromino);
+
+// movement
+void tetromino_move_left(struct tetromino *tetromino);
+void tetromino_move_right(struct tetromino *tetromino);
 
 #endif // TETROMINO_H_

@@ -1,5 +1,3 @@
-#include <stddef.h>
-
 #include "tetromino.h"
 #include "../GLCD/GLCD.h"
 #include "../playing_field/playing_field.h"
@@ -106,6 +104,26 @@ void tetromino_draw(struct tetromino tetromino)
 {
 	for (int i = 0; i < 4; i++)
 		draw_block(tetromino.squares[i], tetromino.color);
+}
+
+void tetromino_move_left(struct tetromino *tetromino)
+{
+	for (int i = 0; i < 4; i++)
+		if (tetromino->squares[i].x == 0)
+			return;
+
+	for (int i = 0; i < 4; i++)
+		tetromino->squares[i].x -= 1;
+}
+
+void tetromino_move_right(struct tetromino *tetromino)
+{
+	for (int i = 0; i < 4; i++)
+		if (tetromino->squares[i].x == 9)
+			return;
+
+	for (int i = 0; i < 4; i++)
+		tetromino->squares[i].x += 1;
 }
 
 /********************

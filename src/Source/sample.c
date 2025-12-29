@@ -17,13 +17,13 @@ int main(void)
 
 	draw_playing_field();
 
-	tetromino_draw(tetromino_create(I_TYPE, (struct square){ 0, 19 }));
-	tetromino_draw(tetromino_create(O_TYPE, (struct square){ 0, 17 }));
-	tetromino_draw(tetromino_create(T_TYPE, (struct square){ 3, 18 }));
-	tetromino_draw(tetromino_create(S_TYPE, (struct square){ 5, 18 }));
-	tetromino_draw(tetromino_create(Z_TYPE, (struct square){ 5, 16 }));
-	tetromino_draw(tetromino_create(J_TYPE, (struct square){ 7, 17 }));
-	tetromino_draw(tetromino_create(L_TYPE, (struct square){ 0, 14 }));
+	struct tetromino i_piece =
+		tetromino_create(I_TYPE, (struct square){ 0, 0 });
+
+	for (int i = 0; i < 15; i++) {
+		tetromino_draw(i_piece);
+		tetromino_move_right(&i_piece);
+	}
 
 	// power-down mode
 	LPC_SC->PCON |= 0x1;
