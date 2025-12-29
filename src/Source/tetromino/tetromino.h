@@ -2,8 +2,9 @@
 #define TETROMINO_H_
 
 #include "../GLCD/GLCD.h"
+#include "../playing_field/playing_field.h"
 
-#define BLOCK_LEN 16 // pixels
+#define BLOCK_LEN (PLAYING_FIELD_WIDTH / 10) // pixels
 
 enum tetromino_type {
 	I_TYPE,

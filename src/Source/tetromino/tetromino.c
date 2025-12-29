@@ -2,6 +2,7 @@
 
 #include "tetromino.h"
 #include "../GLCD/GLCD.h"
+#include "../playing_field/playing_field.h"
 
 static void draw_block(struct square square, enum tetromino_color color);
 
@@ -95,7 +96,6 @@ struct tetromino tetromino_create(enum tetromino_type type,
 			(struct square){ position.x + 2, position.y + 1 };
 
 		new_tetromino.color = Z_COLOR;
-	default:
 		break;
 	}
 
@@ -114,8 +114,10 @@ void tetromino_draw(struct tetromino tetromino)
 
 static void draw_block(struct square square, enum tetromino_color color)
 {
-	struct square upper_left = { square.x * BLOCK_LEN,
-				     square.y * BLOCK_LEN };
+	struct square upper_left = {
+		square.x * BLOCK_LEN + VERTICAL_BORDER_WIDTH,
+		square.y * BLOCK_LEN + HORIZONTAL_BORDER_WIDTH
+	};
 
 	for (int i = upper_left.x; i < upper_left.x + BLOCK_LEN; i++)
 		for (int j = upper_left.y; j < upper_left.y + BLOCK_LEN; j++)
