@@ -3,9 +3,9 @@
 
 void TIMER0_IRQHandler(void)
 {
-	if (LPC_TIM0->IR & 1) // MR0
-	{
-		LPC_TIM0->IR = 1; //clear interrupt flag
+	// MR0
+	if (LPC_TIM0->IR & 1) {
+		LPC_TIM0->IR = 1; // clear interrupt flag
 	} else if (LPC_TIM0->IR & 2) { // MR1
 		LPC_TIM0->IR = 2; // clear interrupt flag
 	} else if (LPC_TIM0->IR & 4) { // MR2
@@ -17,9 +17,9 @@ void TIMER0_IRQHandler(void)
 
 void TIMER1_IRQHandler(void)
 {
-	if (LPC_TIM1->IR & 1) // MR0
-	{
-		LPC_TIM1->IR = 1; //clear interrupt flag
+	// MR0
+	if (LPC_TIM1->IR & 1) {
+		LPC_TIM1->IR = 1; // clear interrupt flag
 	} else if (LPC_TIM1->IR & 2) { // MR1
 		LPC_TIM1->IR = 2; // clear interrupt flag
 	} else if (LPC_TIM1->IR & 4) { // MR2
@@ -31,9 +31,9 @@ void TIMER1_IRQHandler(void)
 
 void TIMER2_IRQHandler(void)
 {
-	if (LPC_TIM2->IR & 1) // MR0
-	{
-		LPC_TIM2->IR = 1; //clear interrupt flag
+	// MR0
+	if (LPC_TIM2->IR & 1) {
+		LPC_TIM2->IR = 1; // clear interrupt flag
 	} else if (LPC_TIM2->IR & 2) { // MR1
 		LPC_TIM2->IR = 2; // clear interrupt flag
 	} else if (LPC_TIM2->IR & 4) { // MR2
@@ -45,8 +45,8 @@ void TIMER2_IRQHandler(void)
 
 void TIMER3_IRQHandler(void)
 {
-	if (LPC_TIM3->IR & 1) // MR0
-	{
+	// MR0
+	if (LPC_TIM3->IR & 1) {
 		LPC_TIM3->IR = 1; // clear interrupt flag
 	} else if (LPC_TIM3->IR & 2) { // MR1
 		LPC_TIM3->IR = 2; // clear interrupt flag

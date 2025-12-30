@@ -3,12 +3,15 @@
 #include "../playing_field/playing_field.h"
 
 static void draw_block(struct square square, enum tetromino_color color);
+static void tetromino_hide(struct tetromino *tetromino);
+static void tetromino_shift(struct tetromino *tetromino, struct square vector);
 
 struct tetromino tetromino_create(enum tetromino_type type,
 				  struct square position)
 {
 	struct tetromino new_tetromino;
 	new_tetromino.type = type;
+	new_tetromino.placed = false;
 
 	switch (type) {
 	case I_TYPE:
@@ -112,8 +115,7 @@ void tetromino_move_left(struct tetromino *tetromino)
 		if (tetromino->squares[i].x == 0)
 			return;
 
-	for (int i = 0; i < 4; i++)
-		tetromino->squares[i].x -= 1;
+	tetromino_shift(tetromino, (struct square){ -1, 0 });
 }
 
 void tetromino_move_right(struct tetromino *tetromino)
@@ -122,8 +124,14 @@ void tetromino_move_right(struct tetromino *tetromino)
 		if (tetromino->squares[i].x == 9)
 			return;
 
-	for (int i = 0; i < 4; i++)
-		tetromino->squares[i].x += 1;
+	tetromino_shift(tetromino, (struct square){ 1, 0 });
+}
+
+void tetromino_move_down(struct tetromino *tetromino)
+{
+	// TODO: check if tetromino is touching wall or another tetromino
+
+	tetromino_shift(tetromino, (struct square){ 0, 1 });
 }
 
 void tetromino_rotate_clockwise(struct tetromino *tetromino)
@@ -157,4 +165,23 @@ static void draw_block(struct square square, enum tetromino_color color)
 	for (int i = upper_left.x; i < upper_left.x + BLOCK_LEN; i++)
 		for (int j = upper_left.y; j < upper_left.y + BLOCK_LEN; j++)
 			LCD_SetPoint(i, j, color);
+}
+
+static void tetromino_hide(struct tetromino *tetromino)
+{
+	for (int i = 0; i < 4; i++)
+		draw_block(tetromino->squares[i], Black);
+}
+
+// TODO: change "struct square" name
+static void tetromino_shift(struct tetromino *tetromino, struct square vector)
+{
+	tetromino_hide(tetromino);
+
+	for (int i = 0; i < 4; i++) {
+		tetromino->squares[i].x += vector.x;
+		tetromino->squares[i].y += vector.y;
+	}
+
+	tetromino_draw(*tetromino);
 }

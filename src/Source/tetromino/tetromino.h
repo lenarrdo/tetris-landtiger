@@ -1,10 +1,13 @@
 #ifndef TETROMINO_H_
 #define TETROMINO_H_
 
+#include <stdbool.h>
+
 #include "../GLCD/GLCD.h"
 #include "../playing_field/playing_field.h"
 
-#define BLOCK_LEN (PLAYING_FIELD_WIDTH / 10) // pixels
+#define NOF_TETROMINOS 7
+#define BLOCK_LEN (PLAYING_FIELD_WIDTH_PX / 10) // pixels
 
 enum tetromino_type {
 	I_TYPE,
@@ -35,18 +38,18 @@ struct tetromino {
 	struct square squares[4];
 	enum tetromino_type type;
 	enum tetromino_color color;
+	bool placed;
 };
 
 // creation
 struct tetromino tetromino_create(enum tetromino_type type,
 				  struct square position);
 
-// visualization
+// visualization & movement
 void tetromino_draw(struct tetromino tetromino);
-
-// movement
 void tetromino_move_left(struct tetromino *tetromino);
 void tetromino_move_right(struct tetromino *tetromino);
+void tetromino_move_down(struct tetromino *tetromino);
 void tetromino_rotate_clockwise(struct tetromino *tetromino);
 
 #endif // TETROMINO_H_
