@@ -16,7 +16,7 @@ extern uint8_t ScaleFlag;
 #endif
 
 // #define ONE_SECOND (25000000)
-#define ONE_SECOND (2500000)
+#define ONE_SECOND (250000)
 
 int high_score = 0;
 int cleared_lines = 0;
@@ -37,7 +37,8 @@ int main(void)
 	SystemInit();
 	LCD_Initialization();
 
-	draw_playing_field();
+	playing_field_draw();
+	playing_field_reset();
 
 	init_timer(TIMER0, 0, 0, CONTROL_RESET | CONTROL_INTERRUPT, ONE_SECOND);
 	enable_timer(TIMER0);

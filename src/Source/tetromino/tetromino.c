@@ -1,6 +1,6 @@
 #include "tetromino.h"
-#include "../GLCD/GLCD.h"
-#include "../playing_field/playing_field.h"
+#include "playing_field/playing_field.h"
+#include "GLCD/GLCD.h"
 
 static void draw_block(struct square square, enum tetromino_color color);
 static void tetromino_hide(struct tetromino *tetromino);
@@ -129,7 +129,14 @@ void tetromino_move_right(struct tetromino *tetromino)
 
 void tetromino_move_down(struct tetromino *tetromino)
 {
-	// TODO: check if tetromino is touching wall or another tetromino
+	for (int i = 0; i < 4; i++)
+		if (playing_field_is_occupied_or_bottom(
+			    tetromino->squares[i].x,
+			    tetromino->squares[i].y + 1)) {
+			place_tetromino(tetromino);
+			tetromino->placed = true;
+			return;
+		}
 
 	tetromino_shift(tetromino, (struct square){ 0, 1 });
 }
