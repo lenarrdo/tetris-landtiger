@@ -28,7 +28,7 @@ static inline void enter_power_down(void)
 	LPC_SC->PCON |= (1U << 0);
 	LPC_SC->PCON &= ~(1U << 1);
 
-	__ASM("wfi");
+	__asm volatile("wfi");
 }
 
 int main(void)
