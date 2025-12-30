@@ -53,6 +53,7 @@ void tetromino_hide(struct tetromino *tetromino);
 void tetromino_move_left(struct tetromino *tetromino);
 void tetromino_move_right(struct tetromino *tetromino);
 void tetromino_move_down(struct tetromino *tetromino);
+void tetromino_hard_drop(struct tetromino *tetromino);
 void tetromino_rotate_clockwise(struct tetromino *tetromino);
 
 #endif // TETROMINO_H_

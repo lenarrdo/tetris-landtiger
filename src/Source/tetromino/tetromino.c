@@ -146,6 +146,12 @@ void tetromino_move_down(struct tetromino *tetromino)
 	tetromino_shift(tetromino, (struct square){ 0, 1 });
 }
 
+void tetromino_hard_drop(struct tetromino *tetromino)
+{
+	while (!tetromino->placed)
+		tetromino_move_down(tetromino);
+}
+
 void tetromino_rotate_clockwise(struct tetromino *tetromino)
 {
 	if (tetromino->type == O_TYPE)

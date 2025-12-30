@@ -1,25 +1,25 @@
 #include "button.h"
-#include "lpc17xx.h"
+#include "LPC17xx.h"
+#include "tetromino/tetromino.h"
+#include "game_stats.h"
 
-extern int down;
+#define CLEAR_PENDING_INTERRUPT(button) (LPC_SC->EXTINT &= (1 << (button)))
 
-// INT0
 void EINT0_IRQHandler(void)
 {
-	LPC_SC->EXTINT &= (1 << 0); // clear pending interrupt
+	CLEAR_PENDING_INTERRUPT(0);
 }
 
-// KEY1
 void EINT1_IRQHandler(void)
 {
-	NVIC_DisableIRQ(EINT1_IRQn); // disable Button interrupts
-	LPC_PINCON->PINSEL4 &= ~(1 << 22); // GPIO pin selection
-	down = 1;
-	LPC_SC->EXTINT &= (1 << 1); // clear pending interrupt
+	CLEAR_PENDING_INTERRUPT(1);
 }
 
-// KEY2
 void EINT2_IRQHandler(void)
 {
-	LPC_SC->EXTINT &= (1 << 2); // clear pending interrupt
+	tetromino_hide(&current_tetromino);
+	tetromino_hard_drop(&current_tetromino);
+	tetromino_draw(current_tetromino);
+
+	CLEAR_PENDING_INTERRUPT(2);
 }

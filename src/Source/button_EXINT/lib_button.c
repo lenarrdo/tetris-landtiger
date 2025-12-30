@@ -1,10 +1,6 @@
-
 #include "button.h"
-#include "lpc17xx.h"
+#include "LPC17xx.h"
 
-/*
- * @brief  Function that initializes Buttons
- */
 void BUTTON_init(void)
 {
 	LPC_PINCON->PINSEL4 |= (1 << 20); // External interrupt 0 pin selection

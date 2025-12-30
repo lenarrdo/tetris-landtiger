@@ -6,6 +6,7 @@
 #include "tetromino/tetromino.h"
 #include "playing_field/playing_field.h"
 #include "game_stats.h"
+#include "button_EXINT/button.h"
 #include "timer/timer.h"
 
 // ScaleFlag needs to visible in order for the emulator to find the symbol (can
@@ -16,7 +17,7 @@ extern uint8_t ScaleFlag;
 #endif
 
 // #define ONE_SECOND (25000000)
-#define ONE_SECOND (250000)
+#define ONE_SECOND (2500000)
 
 int high_score = 0;
 int cleared_lines = 0;
@@ -36,6 +37,7 @@ int main(void)
 	srand(time(NULL));
 	SystemInit();
 	LCD_Initialization();
+	BUTTON_init();
 
 	playing_field_draw();
 	playing_field_reset();
