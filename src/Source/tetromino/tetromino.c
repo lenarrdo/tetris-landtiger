@@ -3,7 +3,6 @@
 #include "GLCD/GLCD.h"
 
 static void draw_block(struct square square, enum tetromino_color color);
-static void tetromino_hide(struct tetromino *tetromino);
 static void tetromino_shift(struct tetromino *tetromino, struct square vector);
 
 struct tetromino tetromino_create(enum tetromino_type type,
@@ -109,6 +108,12 @@ void tetromino_draw(struct tetromino tetromino)
 		draw_block(tetromino.squares[i], tetromino.color);
 }
 
+void tetromino_hide(struct tetromino *tetromino)
+{
+	for (int i = 0; i < 4; i++)
+		draw_block(tetromino->squares[i], Black);
+}
+
 void tetromino_move_left(struct tetromino *tetromino)
 {
 	for (int i = 0; i < 4; i++)
@@ -174,21 +179,11 @@ static void draw_block(struct square square, enum tetromino_color color)
 			LCD_SetPoint(i, j, color);
 }
 
-static void tetromino_hide(struct tetromino *tetromino)
-{
-	for (int i = 0; i < 4; i++)
-		draw_block(tetromino->squares[i], Black);
-}
-
 // TODO: change "struct square" name
 static void tetromino_shift(struct tetromino *tetromino, struct square vector)
 {
-	tetromino_hide(tetromino);
-
 	for (int i = 0; i < 4; i++) {
 		tetromino->squares[i].x += vector.x;
 		tetromino->squares[i].y += vector.y;
 	}
-
-	tetromino_draw(*tetromino);
 }

@@ -51,7 +51,9 @@ int main(void)
 
 		while (!current_tetromino.placed) {
 			enter_power_down();
+			tetromino_hide(&current_tetromino);
 			tetromino_move_down(&current_tetromino);
+			tetromino_draw(current_tetromino);
 		}
 	} while (game_state != GAME_OVER);
 

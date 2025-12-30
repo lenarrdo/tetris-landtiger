@@ -45,8 +45,11 @@ struct tetromino {
 struct tetromino tetromino_create(enum tetromino_type type,
 				  struct square position);
 
-// visualization & movement
+// visualization
 void tetromino_draw(struct tetromino tetromino);
+void tetromino_hide(struct tetromino *tetromino);
+
+// movement
 void tetromino_move_left(struct tetromino *tetromino);
 void tetromino_move_right(struct tetromino *tetromino);
 void tetromino_move_down(struct tetromino *tetromino);
