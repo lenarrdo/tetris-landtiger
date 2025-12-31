@@ -3,6 +3,7 @@
 
 #include "LPC17xx.h"
 #include "GLCD/GLCD.h"
+#include "RIT/RIT.h"
 #include "tetromino/tetromino.h"
 #include "playing_field/playing_field.h"
 #include "game_stats.h"
@@ -38,6 +39,8 @@ int main(void)
 	SystemInit();
 	LCD_Initialization();
 	BUTTON_init();
+	init_RIT(0x004C4B40); // RIT Initialization 50 msec
+	enable_RIT();
 
 	// game_state = PAUSED;
 	// LCD_Clear(Blue);
