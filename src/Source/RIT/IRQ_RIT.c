@@ -284,22 +284,22 @@ void RIT_IRQHandler(void)
 
 	///////////////////////////////////////////////////////////////////
 
-	/* Joystick UP */
-
+	// Joystick UP
 	if (UP_LEFT_activated == 0 && UP_RIGHT_activated == 0) {
-		if ((LPC_GPIO1->FIOPIN & (1 << 29)) == 0) { /* Joystick UP */
-			/* Joytick UP pressed */
+		if ((LPC_GPIO1->FIOPIN & (1 << 29)) == 0) {
 			J_up++;
 			switch (J_up) {
 			case 1:
-				// short press
-				// your code
+				if (game_state == PLAYING) {
+					tetromino_hide(&current_tetromino);
+					tetromino_rotate_clockwise(
+						&current_tetromino);
+					tetromino_draw(current_tetromino);
+				}
 				break;
 			case long_press_count_1:
-				// your code here (for long press)
 				break;
 			default:
-				// potential other code here
 				break;
 			}
 		} else {
@@ -334,47 +334,46 @@ void RIT_IRQHandler(void)
 
 	///////////////////////////////////////////////////////////////////
 
-	/* Joystick RIGHT */
-
+	// Joystick RIGHT
 	if (DOWN_RIGHT_activated == 0 && UP_RIGHT_activated == 0) {
-		if ((LPC_GPIO1->FIOPIN & (1 << 28)) == 0) { /* Joystick RIGHT */
-			/* Joytick RIGHT pressed */
+		if ((LPC_GPIO1->FIOPIN & (1 << 28)) == 0) {
 			J_right++;
 			switch (J_right) {
 			case 1:
-				//short press
-				//your code
+				if (game_state == PLAYING) {
+					tetromino_hide(&current_tetromino);
+					tetromino_move_right(
+						&current_tetromino);
+					tetromino_draw(current_tetromino);
+				}
 				break;
 			case long_press_count_1:
-				// your code here (for long press)
 				break;
 			default:
-				// potential other code here
 				break;
 			}
 		} else {
 			J_right = 0;
-		} // end Joystick RIGHT
+		}
 	}
 
 	///////////////////////////////////////////////////////////////////
 
-	/* Joystick LEFT */
-
+	// Joystick LEFT
 	if (UP_LEFT_activated == 0 && DOWN_LEFT_activated == 0) {
-		if ((LPC_GPIO1->FIOPIN & (1 << 27)) == 0) { /* Joystick LEFT */
-			/* Joytick LEFT pressed */
+		if ((LPC_GPIO1->FIOPIN & (1 << 27)) == 0) {
 			J_left++;
 			switch (J_left) {
 			case 1:
-				//short press
-				//your code
+				if (game_state == PLAYING) {
+					tetromino_hide(&current_tetromino);
+					tetromino_move_left(&current_tetromino);
+					tetromino_draw(current_tetromino);
+				}
 				break;
 			case long_press_count_1:
-				// your code here (for long press)
 				break;
 			default:
-				// potential other code here
 				break;
 			}
 		} else {

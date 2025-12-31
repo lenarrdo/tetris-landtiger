@@ -1,5 +1,4 @@
 #include <stdlib.h>
-#include <time.h>
 
 #include "LPC17xx.h"
 #include "GLCD/GLCD.h"
@@ -9,6 +8,7 @@
 #include "game_stats.h"
 #include "button_EXINT/button.h"
 #include "timer/timer.h"
+#include "joystick/joystick.h"
 
 // ScaleFlag needs to visible in order for the emulator to find the symbol (can
 // be placed also inside system_LPC17xx.h but since it is RO, it needs more
@@ -46,6 +46,8 @@ int main(void)
 
 	init_RIT(FIFTY_MSEC);
 	enable_RIT();
+
+	joystick_init();
 
 	init_timer(TIMER0, 0, 0, CONTROL_RESET | CONTROL_INTERRUPT, ONE_SECOND);
 	init_timer(TIMER1, 0, 0, CONTROL_NULL, 0);
