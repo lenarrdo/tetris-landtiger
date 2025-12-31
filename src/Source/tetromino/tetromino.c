@@ -8,9 +8,8 @@ static void tetromino_shift(struct tetromino *tetromino, struct block vector);
 struct tetromino tetromino_create(enum tetromino_type type,
 				  struct block position)
 {
-	struct tetromino new_tetromino;
+	struct tetromino new_tetromino = { 0 };
 	new_tetromino.type = type;
-	new_tetromino.placed = false;
 
 	switch (type) {
 	case I_TYPE:
@@ -98,6 +97,11 @@ struct tetromino tetromino_create(enum tetromino_type type,
 		new_tetromino.color = Z_COLOR;
 		break;
 	}
+
+	for (int i = 0; i < 4; i++)
+		new_tetromino.placed |= playing_field_is_occupied(
+			new_tetromino.blocks[i].x,
+			new_tetromino.blocks[i].y + 1);
 
 	return new_tetromino;
 }

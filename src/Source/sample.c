@@ -23,6 +23,7 @@ extern uint8_t ScaleFlag;
 #endif
 
 int high_score;
+int score;
 int cleared_lines;
 enum game_state game_state;
 struct tetromino current_tetromino;
@@ -44,16 +45,18 @@ int main(void)
 	init_RIT(FIFTY_MSEC);
 	enable_RIT();
 
-	// game_state = PAUSED;
-	// LCD_Clear(Blue);
-	// while (game_state == PAUSED)
-	// 	enter_power_down();
+menu:
+	game_state = PAUSED;
+	LCD_Clear(Blue);
+	while (game_state == PAUSED)
+		enter_power_down();
 
 	/***************
 	 * GAME BEGINS *
 	 ***************/
 
 	high_score = 0;
+	score = 0;
 	cleared_lines = 0;
 
 	playing_field_reset();
@@ -68,11 +71,19 @@ int main(void)
 						     (struct block){ 3, 0 });
 		tetromino_draw(current_tetromino);
 
+		for (int i = 0; game_state != GAME_OVER && i < 4; i++)
+			if (playing_field_is_occupied(
+				    current_tetromino.blocks[i].x,
+				    current_tetromino.blocks[i].y))
+				game_state = GAME_OVER;
+
 		while (!current_tetromino.placed)
 			enter_power_down();
 
 	} while (game_state != GAME_OVER);
 
-	for (;;)
-		enter_power_down();
+	if (score > high_score)
+		high_score = score;
+	disable_timer(TIMER0);
+	goto menu;
 }
