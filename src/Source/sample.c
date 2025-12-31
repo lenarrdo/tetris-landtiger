@@ -65,7 +65,7 @@ int main(void)
 	game_state = PLAYING;
 	do {
 		current_tetromino = tetromino_create(rand() % NOF_TETROMINOS,
-						     (struct square){ 3, 0 });
+						     (struct block){ 3, 0 });
 		tetromino_draw(current_tetromino);
 
 		while (!current_tetromino.placed)

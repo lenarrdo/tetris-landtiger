@@ -29,13 +29,13 @@ enum tetromino_color {
 	Z_COLOR = Red,
 };
 
-struct square {
+struct block {
 	int x;
 	int y;
 };
 
 struct tetromino {
-	struct square squares[4];
+	struct block blocks[4];
 	enum tetromino_type type;
 	enum tetromino_color color;
 	bool placed;
@@ -43,7 +43,7 @@ struct tetromino {
 
 // creation
 struct tetromino tetromino_create(enum tetromino_type type,
-				  struct square position);
+				  struct block position);
 
 // visualization
 void tetromino_draw(struct tetromino tetromino);

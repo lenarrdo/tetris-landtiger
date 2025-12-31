@@ -49,22 +49,22 @@ void playing_field_reset(void)
 			playing_field[i][j] = false;
 }
 
-bool playing_field_is_occupied_or_bottom(int pos_x, int pos_y)
+bool playing_field_is_occupied(int pos_x, int pos_y)
 {
-	return playing_field[pos_x][pos_y] || pos_y == PLAYING_FIELD_VSQUARES;
+	return playing_field[pos_x][pos_y];
 }
 
-void place_tetromino(struct tetromino *tetromino)
+void playing_field_add_tetromino(struct tetromino *tetromino)
 {
 	for (int i = 0; i < 4; i++)
-		playing_field[tetromino->squares[i].x][tetromino->squares[i].y] =
+		playing_field[tetromino->blocks[i].x][tetromino->blocks[i].y] =
 			true;
 }
 
-void remove_tetromino(struct tetromino *tetromino)
+void playing_field_remove_tetromino(struct tetromino *tetromino)
 {
 	for (int i = 0; i < 4; i++)
-		playing_field[tetromino->squares[i].x][tetromino->squares[i].y] =
+		playing_field[tetromino->blocks[i].x][tetromino->blocks[i].y] =
 			false;
 }
 
