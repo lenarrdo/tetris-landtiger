@@ -38,15 +38,20 @@ static inline void enter_power_down(void)
 
 int main(void)
 {
-	srand(time(NULL));
 	SystemInit();
+
 	LCD_Initialization();
+
 	BUTTON_init();
+
 	init_RIT(FIFTY_MSEC);
 	enable_RIT();
 
+	init_timer(TIMER0, 0, 0, CONTROL_RESET | CONTROL_INTERRUPT, ONE_SECOND);
+	init_timer(TIMER1, 0, 0, CONTROL_NULL, 0);
+
 menu:
-	game_state = PAUSED;
+	enable_timer(TIMER1);
 	LCD_Clear(Blue);
 	while (game_state == PAUSED)
 		enter_power_down();
@@ -55,6 +60,9 @@ menu:
 	 * GAME BEGINS *
 	 ***************/
 
+	srand(get_timer_value(TIMER1));
+	disable_timer(TIMER1);
+
 	high_score = 0;
 	score = 0;
 	cleared_lines = 0;
@@ -62,7 +70,6 @@ menu:
 	playing_field_reset();
 	playing_field_draw();
 
-	init_timer(TIMER0, 0, 0, CONTROL_RESET | CONTROL_INTERRUPT, ONE_SECOND);
 	enable_timer(TIMER0);
 
 	game_state = PLAYING;
