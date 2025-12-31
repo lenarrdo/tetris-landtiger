@@ -19,9 +19,9 @@ extern uint8_t ScaleFlag;
 // #define ONE_SECOND (25000000)
 #define ONE_SECOND (2500000)
 
-int high_score = 0;
-int cleared_lines = 0;
-enum game_state game_state = MENU;
+int high_score;
+int cleared_lines;
+enum game_state game_state;
 struct tetromino current_tetromino;
 
 static inline void enter_power_down(void)
@@ -39,16 +39,28 @@ int main(void)
 	LCD_Initialization();
 	BUTTON_init();
 
-	playing_field_draw();
+	// game_state = PAUSED;
+	// LCD_Clear(Blue);
+	// while (game_state == PAUSED)
+	// 	enter_power_down();
+
+	/***************
+	 * GAME BEGINS *
+	 ***************/
+
+	high_score = 0;
+	cleared_lines = 0;
+
 	playing_field_reset();
+	playing_field_draw();
 
 	init_timer(TIMER0, 0, 0, CONTROL_RESET | CONTROL_INTERRUPT, ONE_SECOND);
 	enable_timer(TIMER0);
 
+	game_state = PLAYING;
 	do {
 		current_tetromino = tetromino_create(rand() % NOF_TETROMINOS,
 						     (struct square){ 3, 0 });
-
 		tetromino_draw(current_tetromino);
 
 		while (!current_tetromino.placed)
