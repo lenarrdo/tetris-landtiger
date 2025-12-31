@@ -624,6 +624,22 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>joystick
+</GroupName>
+          <Files>
+            <File>
+              <FileName>lib_joystick.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\joystick\lib_joystick.c</FilePath>
+            </File>
+            <File>
+              <FileName>joystick.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\joystick\joystick.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>::CMSIS</GroupName>
         </Group>
       </Groups>
@@ -1191,6 +1207,22 @@
               <FileName>IRQ_RIT.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Source\RIT\IRQ_RIT.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>joystick
+</GroupName>
+          <Files>
+            <File>
+              <FileName>lib_joystick.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\joystick\lib_joystick.c</FilePath>
+            </File>
+            <File>
+              <FileName>joystick.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\joystick\joystick.h</FilePath>
             </File>
           </Files>
         </Group>
