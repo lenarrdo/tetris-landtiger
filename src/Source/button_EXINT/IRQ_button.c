@@ -1,11 +1,8 @@
 #include "button.h"
 #include "LPC17xx.h"
-#include "tetromino/tetromino.h"
-#include "game_stats.h"
-#include "timer/timer.h"
+#include "RIT/RIT.h"
 
 #define CLEAR_PENDING_INTERRUPT(button) (LPC_SC->EXTINT &= (1 << (button)))
-#define ONE_SECOND (2500000)
 
 void EINT0_IRQHandler(void)
 {
@@ -14,29 +11,18 @@ void EINT0_IRQHandler(void)
 
 void EINT1_IRQHandler(void)
 {
-	switch (game_state) {
-	case PAUSED:
-		enable_timer(TIMER0);
-		game_state = PLAYING;
-		break;
-	case PLAYING:
-		disable_timer(TIMER0);
-		game_state = PAUSED;
-		break;
-	case GAME_OVER:
-		// TODO: reset playing field and goto menu.
-		break;
-	}
+	down_1 = 1;
+	NVIC_DisableIRQ(EINT1_IRQn);
+	LPC_PINCON->PINSEL4 &= ~(1 << 22);
+
 	CLEAR_PENDING_INTERRUPT(1);
 }
 
 void EINT2_IRQHandler(void)
 {
-	if (game_state == PLAYING) {
-		tetromino_hide(&current_tetromino);
-		tetromino_hard_drop(&current_tetromino);
-		tetromino_draw(current_tetromino);
-	}
+	down_2 = 1;
+	NVIC_DisableIRQ(EINT2_IRQn);
+	LPC_PINCON->PINSEL4 &= ~(1 << 24);
 
 	CLEAR_PENDING_INTERRUPT(2);
 }

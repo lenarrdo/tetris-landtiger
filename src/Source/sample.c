@@ -15,10 +15,12 @@
 // work)
 #ifdef SIMULATOR
 extern uint8_t ScaleFlag;
-#endif
-
-// #define ONE_SECOND (25000000)
 #define ONE_SECOND (2500000)
+#define FIFTY_MSEC (700000)
+#else
+// #define ONE_SECOND (25000000)
+// #define FIFTY_MSEC (ONE_SECOND / 20)
+#endif
 
 int high_score;
 int cleared_lines;
@@ -39,7 +41,7 @@ int main(void)
 	SystemInit();
 	LCD_Initialization();
 	BUTTON_init();
-	init_RIT(0x004C4B40); // RIT Initialization 50 msec
+	init_RIT(FIFTY_MSEC);
 	enable_RIT();
 
 	// game_state = PAUSED;

@@ -1,5 +1,8 @@
 #include "LPC17xx.h"
 #include "RIT.h"
+#include "game_stats.h"
+#include "tetromino/tetromino.h"
+#include "timer.h"
 
 /* Variabili Globali Gestione De-Bouncing */
 
@@ -53,29 +56,36 @@ void RIT_IRQHandler(void)
 				toRelease_down_0 = 0;
 			}
 			down_0 = 0;
-			NVIC_EnableIRQ(
-				EINT0_IRQn); /* disable Button interrupts		 */
-			LPC_PINCON->PINSEL4 |=
-				(1
-				 << 20); /* External interrupt 0 pin selection   */
+			NVIC_EnableIRQ(EINT0_IRQn); // disable Button interrupts
+			LPC_PINCON->PINSEL4 |= (1 << 20); /* External interrupt
+							   * 0 pin selection */
 		}
 	} // end INT0
 
 	///////////////////////////////////////////////////////////////////
 
-	/* KEY1 */
-
-	if (down_1 != 0) { /* KEY1 */
+	// KEY1
+	if (down_1 != 0) {
 		down_1++;
 		if ((LPC_GPIO2->FIOPIN & (1 << 11)) == 0) { /* button premuto */
 			switch (down_1) {
-			case 2:
-				// short press
-				// your code here
+			case 2: // short press
+				switch (game_state) {
+				case PAUSED:
+					enable_timer(TIMER0);
+					game_state = PLAYING;
+					break;
+				case PLAYING:
+					disable_timer(TIMER0);
+					game_state = PAUSED;
+					break;
+				case GAME_OVER:
+					// TODO: reset playing field and goto menu.
+					break;
+				}
 				toRelease_down_1 = 1;
 				break;
 			case long_press_count_1:
-				// your code here (for long press)
 				break;
 			default:
 				break;
@@ -96,19 +106,20 @@ void RIT_IRQHandler(void)
 
 	///////////////////////////////////////////////////////////////////
 
-	/* KEY2 */
-
-	if (down_2 != 0) { /* KEY2 */
+	// KEY2
+	if (down_2 != 0) {
 		down_2++;
 		if ((LPC_GPIO2->FIOPIN & (1 << 12)) == 0) { /* button premuto */
 			switch (down_2) {
-			case 2:
-				// short press
-				// your code here
+			case 2: // short press
+				if (game_state == PLAYING) {
+					tetromino_hide(&current_tetromino);
+					tetromino_hard_drop(&current_tetromino);
+					tetromino_draw(current_tetromino);
+				}
 				toRelease_down_2 = 1;
 				break;
 			case long_press_count_1:
-				// your code here (for long press)
 				break;
 			default:
 				break;

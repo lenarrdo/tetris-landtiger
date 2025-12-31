@@ -3,14 +3,18 @@
 
 #include <stdint.h>
 
+extern volatile int down_0;
+extern volatile int down_1;
+extern volatile int down_2;
+
 // init_RIT.c
-extern uint32_t init_RIT(uint32_t RITInterval);
-extern void enable_RIT(void);
-extern void disable_RIT(void);
-extern void reset_RIT(void);
+uint32_t init_RIT(uint32_t RITInterval);
+void enable_RIT(void);
+void disable_RIT(void);
+void reset_RIT(void);
 unsigned int get_RIT_value();
 
 // IRQ_RIT.c
-extern void RIT_IRQHandler(void);
+void RIT_IRQHandler(void);
 
-#endif /* end __RIT_H */
+#endif
