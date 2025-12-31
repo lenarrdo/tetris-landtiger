@@ -3,7 +3,6 @@
 
 #include <stdint.h>
 
-extern volatile int down_0;
 extern volatile int down_1;
 extern volatile int down_2;
 
