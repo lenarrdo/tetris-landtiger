@@ -1,9 +1,14 @@
 #include "tetromino.h"
 #include "playing_field/playing_field.h"
 #include "GLCD/GLCD.h"
+#include "game_stats.h"
+
+#define MAX_CLEARABLE_LINES 4
 
 static void draw_block(struct block square, enum tetromino_color color);
 static void tetromino_shift(struct tetromino *tetromino, struct block vector);
+static void check_cleared_lines(struct tetromino *tetromino);
+static inline int max(int *arr, int size);
 
 struct tetromino tetromino_create(enum tetromino_type type,
 				  struct block position)
@@ -115,7 +120,7 @@ void tetromino_draw(struct tetromino tetromino)
 void tetromino_hide(struct tetromino tetromino)
 {
 	for (int i = 0; i < 4; i++)
-		draw_block(tetromino.blocks[i], Black);
+		draw_block(tetromino.blocks[i], HIDDEN);
 }
 
 void tetromino_move_left(struct tetromino *tetromino)
@@ -144,6 +149,9 @@ void tetromino_move_down(struct tetromino *tetromino)
 		    tetromino->blocks[i].y == PLAYING_FIELD_BOTTOM) {
 			playing_field_add_tetromino(tetromino);
 			tetromino->placed = true;
+			score += 10;
+
+			check_cleared_lines(tetromino);
 			return;
 		}
 
@@ -187,10 +195,43 @@ static void draw_block(struct block block, enum tetromino_color color)
 			LCD_SetPoint(i, j, color);
 }
 
+static void check_cleared_lines(struct tetromino *tetromino)
+{
+	int cleared_lines[MAX_CLEARABLE_LINES] = { -1, -1, -1, -1 };
+	int nof_cleared_lines = 0;
+	for (int i = 0; i < 4; i++) {
+		int curr_line = tetromino->blocks[i].y;
+		if (playing_field_is_complete_row(curr_line)) {
+			playing_field_clear_row(curr_line);
+			cleared_lines[nof_cleared_lines++] = curr_line;
+		}
+	}
+
+	if (nof_cleared_lines > 0) {
+		score += nof_cleared_lines == MAX_CLEARABLE_LINES ?
+				 600 : // tetris!
+				 100 * nof_cleared_lines;
+
+		int lowest_cleared_line =
+			max(cleared_lines, MAX_CLEARABLE_LINES);
+		playing_field_compress_empty_rows(lowest_cleared_line);
+		playing_field_redraw(lowest_cleared_line, nof_cleared_lines);
+	}
+}
+
 static void tetromino_shift(struct tetromino *tetromino, struct block offset)
 {
 	for (int i = 0; i < 4; i++) {
 		tetromino->blocks[i].x += offset.x;
 		tetromino->blocks[i].y += offset.y;
 	}
+}
+
+static inline int max(int *arr, int size)
+{
+	int max = arr[0];
+	for (int i = 1; i < size; i++)
+		if (arr[i] > max)
+			max = arr[i];
+	return max;
 }

@@ -27,6 +27,7 @@ enum tetromino_color {
 	L_COLOR = Orange,
 	S_COLOR = Green,
 	Z_COLOR = Red,
+	HIDDEN = BACKGROUND_COLOR,
 };
 
 struct block {

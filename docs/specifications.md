@@ -47,17 +47,17 @@ The display of the LandTiger should show:
   - [x] once the tetromino reaches a solid surface (bottom of the playing field or the top of another block), `placed = true && CURR_TETROMINO_SPEED = 0`.
 
 - **Clearing lines**:
-  - [ ] the check occurs each time a tetromino is placed on the field.
-  - [ ] if (one or more horizontal lines of 10 squares have been completely filled with blocks)
-    - [ ] the blocks in those lines are eliminated;
-    - [ ] the blocks in the lines above are shifted down;
-    - [ ] when 4 lines are cleared, the move is called a "tetris"
+  - [x] the check occurs each time a tetromino is placed on the field.
+  - [x] if (one or more horizontal lines of 10 squares have been completely filled with blocks)
+    - [x] the blocks in those lines are eliminated;
+    - [x] the blocks in the lines above are shifted down;
+    - (when 4 lines are cleared, the move is called a "tetris".)
 
 - **Scoring**:
-  - [ ] Placing a tetromino in the field awards 10 points.
-  - [ ] Clearing a single line awards 100 points plus the 10 points from the tetromino placement.
-  - [ ] Clearing multiple lines awards 100 points x number of cleared lines plus the 10 points from the tetromino placement.
-  - [ ] A tetris awards 600 points plus the 10 points from the tetromino placement.
+  - [x] Placing a tetromino in the field awards 10 points.
+  - [x] Clearing a single line awards 100 points plus the 10 points from the tetromino placement.
+  - [x] Clearing multiple lines awards 100 points $\times$ number of cleared lines plus the 10 points from the tetromino placement.
+  - [x] A tetris awards 600 points plus the 10 points from the tetromino placement.
 
 - **Lose conditions**:
   - [?] The game finishes when the placed tetromino goes over the top of the playing field. (considering how things are currently implemented, this event never occurs.)
