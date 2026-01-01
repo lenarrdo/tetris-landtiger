@@ -7,7 +7,7 @@ void TIMER0_IRQHandler(void)
 {
 	// MR0
 	if (LPC_TIM0->IR & 1) {
-		tetromino_hide(&current_tetromino);
+		tetromino_hide(current_tetromino);
 		tetromino_move_down(&current_tetromino);
 		tetromino_draw(current_tetromino);
 		LPC_TIM0->IR = 1; // clear interrupt flag

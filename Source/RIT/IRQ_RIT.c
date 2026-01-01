@@ -96,7 +96,7 @@ static inline void handle_key2_press(void)
 		switch (down_2) {
 		case 2: // short press
 			if (game_state == PLAYING) {
-				tetromino_hide(&current_tetromino);
+				tetromino_hide(current_tetromino);
 				tetromino_hard_drop(&current_tetromino);
 				tetromino_draw(current_tetromino);
 			}
@@ -122,7 +122,7 @@ static inline void handle_joystick_left(void)
 	switch (J_left) {
 	case 1:
 		if (game_state == PLAYING) {
-			tetromino_hide(&current_tetromino);
+			tetromino_hide(current_tetromino);
 			tetromino_move_left(&current_tetromino);
 			tetromino_draw(current_tetromino);
 		}
@@ -150,7 +150,7 @@ static inline void handle_joystick_up(void)
 	switch (J_up) {
 	case 1:
 		if (game_state == PLAYING) {
-			tetromino_hide(&current_tetromino);
+			tetromino_hide(current_tetromino);
 			tetromino_rotate_clockwise(&current_tetromino);
 			tetromino_draw(current_tetromino);
 		}
@@ -166,7 +166,7 @@ static inline void handle_joystick_right(void)
 	switch (J_right) {
 	case 1:
 		if (game_state == PLAYING) {
-			tetromino_hide(&current_tetromino);
+			tetromino_hide(current_tetromino);
 			tetromino_move_right(&current_tetromino);
 			tetromino_draw(current_tetromino);
 		}

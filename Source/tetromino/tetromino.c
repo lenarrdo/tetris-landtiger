@@ -112,10 +112,10 @@ void tetromino_draw(struct tetromino tetromino)
 		draw_block(tetromino.blocks[i], tetromino.color);
 }
 
-void tetromino_hide(struct tetromino *tetromino)
+void tetromino_hide(struct tetromino tetromino)
 {
 	for (int i = 0; i < 4; i++)
-		draw_block(tetromino->blocks[i], Black);
+		draw_block(tetromino.blocks[i], Black);
 }
 
 void tetromino_move_left(struct tetromino *tetromino)
