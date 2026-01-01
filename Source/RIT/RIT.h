@@ -6,6 +6,8 @@
 extern volatile int down_1;
 extern volatile int down_2;
 
+extern volatile int joystick_down;
+
 // init_RIT.c
 uint32_t init_RIT(uint32_t RITInterval);
 void enable_RIT(void);

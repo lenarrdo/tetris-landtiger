@@ -9,10 +9,10 @@ volatile int down_2 = 0;
 static volatile int toRelease_down_1 = 0;
 static volatile int toRelease_down_2 = 0;
 
-static volatile int J_up = 0;
-static volatile int J_down = 0;
-static volatile int J_right = 0;
-static volatile int J_left = 0;
+static volatile int joystick_up = 0;
+volatile int joystick_down = 0;
+static volatile int joystick_right = 0;
+static volatile int joystick_left = 0;
 
 static inline void handle_key1_press(void);
 static inline void handle_key2_press(void);
@@ -33,22 +33,22 @@ void RIT_IRQHandler(void)
 	if ((LPC_GPIO1->FIOPIN & (1 << 29)) == 0)
 		handle_joystick_up();
 	else
-		J_up = 0;
+		joystick_up = 0;
 
 	if ((LPC_GPIO1->FIOPIN & (1 << 26)) == 0)
 		handle_joystick_down();
 	else
-		J_down = 0;
+		joystick_down = 0;
 
 	if ((LPC_GPIO1->FIOPIN & (1 << 28)) == 0)
 		handle_joystick_right();
 	else
-		J_right = 0;
+		joystick_right = 0;
 
 	if ((LPC_GPIO1->FIOPIN & (1 << 27)) == 0)
 		handle_joystick_left();
 	else
-		J_left = 0;
+		joystick_left = 0;
 
 	// reset_RIT(); // se ci sono cose strane come il rit che si ferma
 	LPC_RIT->RICTRL |= 0x1; /* clear interrupt flag */
@@ -118,8 +118,8 @@ static inline void handle_key2_press(void)
 
 static inline void handle_joystick_left(void)
 {
-	J_left++;
-	switch (J_left) {
+	joystick_left++;
+	switch (joystick_left) {
 	case 1:
 		if (game_state == PLAYING) {
 			tetromino_hide(current_tetromino);
@@ -134,10 +134,9 @@ static inline void handle_joystick_left(void)
 
 static inline void handle_joystick_down(void)
 {
-	J_down++;
-	switch (J_down) {
+	joystick_down++;
+	switch (joystick_down) {
 	case 1:
-		// TODO: add soft drop
 		break;
 	default:
 		break;
@@ -146,8 +145,8 @@ static inline void handle_joystick_down(void)
 
 static inline void handle_joystick_up(void)
 {
-	J_up++;
-	switch (J_up) {
+	joystick_up++;
+	switch (joystick_up) {
 	case 1:
 		if (game_state == PLAYING) {
 			tetromino_hide(current_tetromino);
@@ -162,8 +161,8 @@ static inline void handle_joystick_up(void)
 
 static inline void handle_joystick_right(void)
 {
-	J_right++;
-	switch (J_right) {
+	joystick_right++;
+	switch (joystick_right) {
 	case 1:
 		if (game_state == PLAYING) {
 			tetromino_hide(current_tetromino);

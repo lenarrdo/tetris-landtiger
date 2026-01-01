@@ -50,6 +50,7 @@ int main(void)
 	joystick_init();
 
 	init_timer(TIMER0, 0, 0, CONTROL_RESET | CONTROL_INTERRUPT, ONE_SECOND);
+	init_timer(TIMER0, 0, 1, CONTROL_INTERRUPT, ONE_SECOND / 2);
 	init_timer(TIMER1, 0, 0, CONTROL_NULL, 0);
 
 menu:

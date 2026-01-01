@@ -42,7 +42,7 @@ The display of the LandTiger should show:
   - [x] `CURR_TETROMINO_SPEED = 1 square/second` towards the bottom of the screen (no user interaction)
   - [x] joystick left or right: the piece is moved in the specified direction.
   - [x] joystick up: the tetromino is rotated 90° clockwise.
-  - [ ] joystick down: `CURR_TETROMINO_SPEED = 2 square/second` (**soft drop**)
+  - [x] joystick down: `CURR_TETROMINO_SPEED = 2 square/second` (**soft drop**)
   - [x] `KEY2`: the tetromino falls instantly (**hard drop**).
   - [x] once the tetromino reaches a solid surface (bottom of the playing field or the top of another block), `placed = true && CURR_TETROMINO_SPEED = 0`.
 
