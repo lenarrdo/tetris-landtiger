@@ -1,7 +1,0 @@
-[
-  {
-    "directory": "/mnt/c/Users/leonardo/Desktop/tetris-landtiger/src/Source/",
-    "command": "gcc -I. -I./tetromino -I./playing_field -I/mnt/c/Users/leonardo/AppData/Local/Arm/Packs/Keil/LPC1700_DFP/2.7.2/Device/Include -I./CMSIS_core -I./GLCD -I./button_EXINT -I./timer -I./RIT -I./joystick -DSIMULATOR -std=c11 -Wall -Wextra -c sample.c",
-    "file": "sample.c"
-  }
-]

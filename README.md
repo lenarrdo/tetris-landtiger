@@ -22,5 +22,5 @@ the score for a line clear. Clearing four lines at once using an I- shaped
 tetromino is referred to as a "Tetris".
 
 <p align="center">
-  <img src="imgs/tetris.png"/>
+  <img src="./docs/imgs/tetris.png"/>
 </p>
