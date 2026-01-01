@@ -113,6 +113,9 @@ struct tetromino tetromino_create(enum tetromino_type type,
 
 void tetromino_draw(struct tetromino tetromino)
 {
+	if (tetromino.color == HIDDEN)
+		return;
+
 	for (int i = 0; i < 4; i++)
 		draw_block(tetromino.blocks[i], tetromino.color);
 }
@@ -216,6 +219,9 @@ static void check_cleared_lines(struct tetromino *tetromino)
 			max(cleared_lines, MAX_CLEARABLE_LINES);
 		playing_field_compress_empty_rows(lowest_cleared_line);
 		playing_field_redraw(lowest_cleared_line, nof_cleared_lines);
+
+		// to ensure that the tetromino doesn't get redrawn after the lines have been cleared
+		tetromino->color = HIDDEN;
 	}
 }
 
