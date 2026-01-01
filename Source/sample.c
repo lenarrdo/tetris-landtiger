@@ -24,7 +24,7 @@ extern uint8_t ScaleFlag;
 
 int high_score;
 int score;
-int cleared_lines;
+int tot_cleared_lines;
 enum game_state game_state;
 struct tetromino current_tetromino;
 
@@ -68,7 +68,7 @@ menu:
 
 	high_score = 0;
 	score = 0;
-	cleared_lines = 0;
+	tot_cleared_lines = 0;
 
 	playing_field_reset();
 	playing_field_draw();

@@ -5,7 +5,7 @@ enum game_state { PAUSED, PLAYING, GAME_OVER };
 
 extern int high_score;
 extern int score;
-extern int cleared_lines;
+extern int tot_cleared_lines;
 extern enum game_state game_state;
 extern struct tetromino current_tetromino;
 
