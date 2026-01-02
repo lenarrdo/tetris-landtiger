@@ -6,8 +6,6 @@
 
 volatile int down_1 = 0;
 volatile int down_2 = 0;
-static volatile int toRelease_down_1 = 0;
-static volatile int toRelease_down_2 = 0;
 
 static volatile int joystick_up = 0;
 volatile int joystick_down = 0;
@@ -50,8 +48,8 @@ void RIT_IRQHandler(void)
 	else
 		joystick_left = 0;
 
-	// reset_RIT(); // se ci sono cose strane come il rit che si ferma
-	LPC_RIT->RICTRL |= 0x1; /* clear interrupt flag */
+	// reset_RIT();
+	LPC_RIT->RICTRL |= 0x1;
 }
 
 static inline void handle_key1_press(void)
@@ -59,7 +57,7 @@ static inline void handle_key1_press(void)
 	down_1++;
 	if ((LPC_GPIO2->FIOPIN & (1 << 11)) == 0) {
 		switch (down_1) {
-		case 2: // short press
+		case 2:
 			switch (game_state) {
 			case PAUSED:
 				enable_timer(TIMER0);
@@ -73,16 +71,11 @@ static inline void handle_key1_press(void)
 				// TODO: reset playing field and goto menu.
 				break;
 			}
-			toRelease_down_1 = 1;
 			break;
 		default:
 			break;
 		}
-	} else { /* button released */
-		if (toRelease_down_1) {
-			//add code to manage release.
-			toRelease_down_1 = 0;
-		}
+	} else {
 		down_1 = 0;
 		NVIC_EnableIRQ(EINT1_IRQn);
 		LPC_PINCON->PINSEL4 |= (1 << 22);
@@ -92,24 +85,19 @@ static inline void handle_key1_press(void)
 static inline void handle_key2_press(void)
 {
 	down_2++;
-	if ((LPC_GPIO2->FIOPIN & (1 << 12)) == 0) { /* button premuto */
+	if ((LPC_GPIO2->FIOPIN & (1 << 12)) == 0) {
 		switch (down_2) {
-		case 2: // short press
+		case 2:
 			if (game_state == PLAYING) {
 				tetromino_hide(current_tetromino);
 				tetromino_hard_drop(&current_tetromino);
 				tetromino_draw(current_tetromino);
 			}
-			toRelease_down_2 = 1;
 			break;
 		default:
 			break;
 		}
-	} else { /* button released */
-		if (toRelease_down_2) {
-			//add code to manage release.
-			toRelease_down_2 = 0;
-		}
+	} else {
 		down_2 = 0;
 		NVIC_EnableIRQ(EINT2_IRQn);
 		LPC_PINCON->PINSEL4 |= (1 << 24);
