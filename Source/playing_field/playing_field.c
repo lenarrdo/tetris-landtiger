@@ -4,11 +4,15 @@
 #include "playing_field.h"
 #include "tetromino/tetromino.h"
 #include "GLCD/GLCD.h"
+#include "game_stats.h"
+
+#define MAX_DIGITS 6
 
 static void draw_horizontal_wall(int x_pixel, int y_pixel, int length);
 static void draw_vertical_wall(int x_pixel, int y_pixel, int length);
 static void playing_field_copy_row(int dest_line, int src_line);
 static void playing_field_draw_row(int line);
+static void visualize_stat(int x, int y, int num);
 
 enum tetromino_color playing_field[PLAYING_FIELD_HSQUARES]
 				  [PLAYING_FIELD_VSQUARES];
@@ -103,6 +107,21 @@ void playing_field_redraw(int from_row, int nof_cleared_lines)
 		playing_field_draw_row(i);
 }
 
+void visualize_top(void)
+{
+	visualize_stat(170, 110, high_score);
+}
+
+void visualize_score(void)
+{
+	visualize_stat(170, 160, score);
+}
+
+void visualize_lines(void)
+{
+	visualize_stat(170, 210, tot_cleared_lines);
+}
+
 /********************
  * HELPER FUNCTIONS *
  ********************/
@@ -143,4 +162,38 @@ static void playing_field_draw_row(int row_num)
 {
 	for (int x = 0; x < PLAYING_FIELD_HSQUARES; x++)
 		playing_field_draw_cell(x, row_num);
+}
+
+static void itoa(int n, char *s)
+{
+	int i = 0;
+	s[MAX_DIGITS] = '\0';
+
+	// maxout
+	if (n >= 999999) {
+		while (i < MAX_DIGITS)
+			s[i++] = '9';
+		return;
+	}
+
+	do {
+		s[i++] = n % 10 + '0';
+	} while ((n /= 10) > 0);
+
+	while (i < MAX_DIGITS)
+		s[i++] = '0';
+
+	char temp;
+	for (int j = 0, k = i - 1; j < k; j++, k--) {
+		temp = s[j];
+		s[j] = s[k];
+		s[k] = temp;
+	}
+}
+
+static void visualize_stat(int x, int y, int num)
+{
+	char strnum[10];
+	itoa(num, strnum);
+	GUI_Text(x, y, (uint8_t *)strnum, TEXT_COLOR, BACKGROUND_COLOR);
 }

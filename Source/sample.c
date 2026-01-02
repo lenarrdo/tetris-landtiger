@@ -53,6 +53,8 @@ int main(void)
 	init_timer(TIMER0, 0, 1, CONTROL_INTERRUPT, ONE_SECOND / 2);
 	init_timer(TIMER1, 0, 0, CONTROL_NULL, 0);
 
+	high_score = 0;
+
 menu:
 	enable_timer(TIMER1);
 	LCD_Clear(Blue);
@@ -66,7 +68,6 @@ menu:
 	srand(get_timer_value(TIMER1));
 	disable_timer(TIMER1);
 
-	high_score = 0;
 	score = 0;
 	tot_cleared_lines = 0;
 
@@ -92,8 +93,10 @@ menu:
 
 	} while (game_state != GAME_OVER);
 
-	if (score > high_score)
+	if (score > high_score) {
 		high_score = score;
+		visualize_top();
+	}
 	disable_timer(TIMER0);
 	goto menu;
 }

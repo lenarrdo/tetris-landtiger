@@ -36,4 +36,8 @@ bool playing_field_is_occupied(int pos_x, int pos_y);
 
 void playing_field_add_tetromino(struct tetromino *tetromino);
 
+void visualize_score(void);
+void visualize_top(void);
+void visualize_lines(void);
+
 #endif // PLAYING_FIELD_H_

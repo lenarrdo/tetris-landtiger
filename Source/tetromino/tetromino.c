@@ -157,6 +157,7 @@ void tetromino_move_down(struct tetromino *tetromino)
 			playing_field_add_tetromino(tetromino);
 			tetromino->placed = true;
 			score += 10;
+			visualize_score();
 
 			check_cleared_lines(tetromino);
 			return;
@@ -218,6 +219,9 @@ static void check_cleared_lines(struct tetromino *tetromino)
 		score += nof_cleared_lines == MAX_CLEARABLE_LINES ?
 				 600 : // tetris!
 				 100 * nof_cleared_lines;
+		visualize_score();
+		tot_cleared_lines += nof_cleared_lines;
+		visualize_lines();
 
 		int lowest_cleared_line =
 			max(cleared_lines, MAX_CLEARABLE_LINES);
