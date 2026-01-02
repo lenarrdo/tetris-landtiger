@@ -5,13 +5,8 @@
 #include "tetromino/tetromino.h"
 #include "GLCD/GLCD.h"
 
-struct pixel {
-	int x;
-	int y;
-};
-
-static void draw_horizontal_wall(struct pixel from, int length);
-static void draw_vertical_wall(struct pixel from, int length);
+static void draw_horizontal_wall(int x_pixel, int y_pixel, int length);
+static void draw_vertical_wall(int x_pixel, int y_pixel, int length);
 static void playing_field_copy_row(int dest_line, int src_line);
 static void playing_field_draw_row(int line);
 
@@ -23,17 +18,13 @@ void playing_field_draw(void)
 {
 	LCD_Clear(BACKGROUND_COLOR);
 
-	draw_horizontal_wall((struct pixel){ 0, 0 }, MAX_X);
-	draw_horizontal_wall(
-		(struct pixel){ 0, MAX_Y - HORIZONTAL_BORDER_WIDTH }, MAX_X);
+	draw_horizontal_wall(0, 0, MAX_X);
+	draw_horizontal_wall(0, MAX_Y - HORIZONTAL_BORDER_WIDTH, MAX_X);
 
-	draw_vertical_wall((struct pixel){ 0, 0 }, MAX_Y);
-	draw_vertical_wall(
-		(struct pixel){ VERTICAL_BORDER_WIDTH + PLAYING_FIELD_WIDTH_PX,
-				0 },
-		MAX_Y);
-	draw_vertical_wall((struct pixel){ MAX_X - VERTICAL_BORDER_WIDTH, 0 },
+	draw_vertical_wall(0, 0, MAX_Y);
+	draw_vertical_wall(VERTICAL_BORDER_WIDTH + PLAYING_FIELD_WIDTH_PX, 0,
 			   MAX_Y);
+	draw_vertical_wall(MAX_X - VERTICAL_BORDER_WIDTH, 0, MAX_Y);
 
 	GUI_Text(170, 90, (uint8_t *)"TOP", TEXT_COLOR, BACKGROUND_COLOR);
 	GUI_Text(170, 110, (uint8_t *)"000000", TEXT_COLOR, BACKGROUND_COLOR);
@@ -116,18 +107,18 @@ void playing_field_redraw(int from_row, int nof_cleared_lines)
  * HELPER FUNCTIONS *
  ********************/
 
-static void draw_horizontal_wall(struct pixel from, int length)
+static void draw_horizontal_wall(int x_pixel, int y_pixel, int length)
 {
 	for (int i = 0; i < HORIZONTAL_BORDER_WIDTH; i++)
-		LCD_DrawLine(from.x, from.y + i, from.x + length, from.y + i,
-			     BORDER_COLOR);
+		LCD_DrawLine(x_pixel, y_pixel + i, x_pixel + length,
+			     y_pixel + i, BORDER_COLOR);
 }
 
-static void draw_vertical_wall(struct pixel from, int length)
+static void draw_vertical_wall(int x_pixel, int y_pixel, int length)
 {
 	for (int i = 0; i < VERTICAL_BORDER_WIDTH; i++)
-		LCD_DrawLine(from.x + i, from.y, from.x + i, from.y + length,
-			     BORDER_COLOR);
+		LCD_DrawLine(x_pixel + i, y_pixel, x_pixel + i,
+			     y_pixel + length, BORDER_COLOR);
 }
 
 static void playing_field_copy_row(int dest_row, int src_row)
