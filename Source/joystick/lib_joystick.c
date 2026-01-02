@@ -23,3 +23,17 @@ void joystick_init(void)
 	LPC_PINCON->PINSEL3 &= ~(3 << 18);
 	LPC_GPIO1->FIODIR &= ~(1 << 25);
 }
+
+enum joystick_direction joystick_direction(void)
+{
+	if ((LPC_GPIO1->FIOPIN & (1 << 27)) == 0)
+		return LEFT;
+	else if ((LPC_GPIO1->FIOPIN & (1 << 26)) == 0)
+		return DOWN;
+	else if ((LPC_GPIO1->FIOPIN & (1 << 29)) == 0)
+		return UP;
+	else if ((LPC_GPIO1->FIOPIN & (1 << 28)) == 0)
+		return RIGHT;
+	else
+		return CENTER;
+}
