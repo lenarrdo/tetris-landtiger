@@ -129,7 +129,9 @@ void tetromino_hide(struct tetromino tetromino)
 void tetromino_move_left(struct tetromino *tetromino)
 {
 	for (int i = 0; i < 4; i++)
-		if (tetromino->blocks[i].x == 0)
+		if (tetromino->blocks[i].x == PLAYING_FIELD_LEFT_BORDER ||
+		    playing_field_is_occupied(tetromino->blocks[i].x - 1,
+					      tetromino->blocks[i].y))
 			return;
 
 	tetromino_shift(tetromino, (struct block){ -1, 0 });
@@ -138,7 +140,9 @@ void tetromino_move_left(struct tetromino *tetromino)
 void tetromino_move_right(struct tetromino *tetromino)
 {
 	for (int i = 0; i < 4; i++)
-		if (tetromino->blocks[i].x == PLAYING_FIELD_HSQUARES - 1)
+		if (tetromino->blocks[i].x == PLAYING_FIELD_RIGHT_BORDER ||
+		    playing_field_is_occupied(tetromino->blocks[i].x + 1,
+					      tetromino->blocks[i].y))
 			return;
 
 	tetromino_shift(tetromino, (struct block){ 1, 0 });

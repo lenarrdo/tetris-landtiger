@@ -18,7 +18,10 @@ struct tetromino;
 #define PLAYING_FIELD_WIDTH_PX 150
 #define PLAYING_FIELD_HEIGHT_PX 300
 
+#define PLAYING_FIELD_TOP 0
 #define PLAYING_FIELD_BOTTOM (PLAYING_FIELD_VSQUARES - 1)
+#define PLAYING_FIELD_LEFT_BORDER 0
+#define PLAYING_FIELD_RIGHT_BORDER (PLAYING_FIELD_HSQUARES - 1)
 
 void playing_field_draw(void);
 void playing_field_redraw(int from_row, int nof_cleared_lines);
