@@ -88,11 +88,7 @@ static inline void handle_key2_press(void)
 	if ((LPC_GPIO2->FIOPIN & (1 << 12)) == 0) {
 		switch (down_2) {
 		case 2:
-			if (game_state == PLAYING) {
-				tetromino_hide(current_tetromino);
-				tetromino_hard_drop(&current_tetromino);
-				tetromino_draw(current_tetromino);
-			}
+			buffered_move |= HARD_DROP;
 			break;
 		default:
 			break;
@@ -109,11 +105,7 @@ static inline void handle_joystick_left(void)
 	joystick_left++;
 	switch (joystick_left) {
 	case 1:
-		if (game_state == PLAYING) {
-			tetromino_hide(current_tetromino);
-			tetromino_move_left(&current_tetromino);
-			tetromino_draw(current_tetromino);
-		}
+		buffered_move |= MOVE_LEFT;
 		break;
 	default:
 		break;
@@ -136,11 +128,7 @@ static inline void handle_joystick_up(void)
 	joystick_up++;
 	switch (joystick_up) {
 	case 1:
-		if (game_state == PLAYING) {
-			tetromino_hide(current_tetromino);
-			tetromino_rotate_clockwise(&current_tetromino);
-			tetromino_draw(current_tetromino);
-		}
+		buffered_move |= ROTATE;
 		break;
 	default:
 		break;
@@ -152,11 +140,7 @@ static inline void handle_joystick_right(void)
 	joystick_right++;
 	switch (joystick_right) {
 	case 1:
-		if (game_state == PLAYING) {
-			tetromino_hide(current_tetromino);
-			tetromino_move_right(&current_tetromino);
-			tetromino_draw(current_tetromino);
-		}
+		buffered_move |= MOVE_RIGHT;
 		break;
 	default:
 		break;

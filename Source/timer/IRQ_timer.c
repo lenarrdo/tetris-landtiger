@@ -1,23 +1,18 @@
 #include "LPC17xx.h"
 #include "timer.h"
-#include "tetromino/tetromino.h"
 #include "game_stats.h"
 #include "RIT/RIT.h"
+#include "tetromino/tetromino.h"
 
 void TIMER0_IRQHandler(void)
 {
 	// MR0
 	if (LPC_TIM0->IR & 1) {
-		tetromino_hide(current_tetromino);
-		tetromino_move_down(&current_tetromino);
-		tetromino_draw(current_tetromino);
+		buffered_move |= MOVE_DOWN;
 		LPC_TIM0->IR = 1;
 	} else if (LPC_TIM0->IR & 2) { // MR1
-		if (joystick_down) {
-			tetromino_hide(current_tetromino);
-			tetromino_move_down(&current_tetromino);
-			tetromino_draw(current_tetromino);
-		}
+		if (joystick_down)
+			buffered_move |= MOVE_DOWN;
 		LPC_TIM0->IR = 2;
 	} else if (LPC_TIM0->IR & 4) { // MR2
 		LPC_TIM0->IR = 4;

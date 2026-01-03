@@ -27,14 +27,10 @@ int score;
 int tot_cleared_lines;
 enum game_state game_state;
 struct tetromino current_tetromino;
+unsigned int buffered_move;
 
-static inline void enter_power_down(void)
-{
-	LPC_SC->PCON |= (1U << 0);
-	LPC_SC->PCON &= ~(1U << 1);
-
-	__asm volatile("wfi");
-}
+static void handle_user_input(void);
+static inline void enter_power_down(void);
 
 int main(void)
 {
@@ -70,6 +66,7 @@ menu:
 
 	score = 0;
 	tot_cleared_lines = 0;
+	buffered_move = NONE;
 
 	playing_field_reset();
 	playing_field_draw();
@@ -88,9 +85,10 @@ menu:
 				    current_tetromino.blocks[i].y))
 				game_state = GAME_OVER;
 
-		while (!current_tetromino.placed)
+		while (!current_tetromino.placed) {
 			enter_power_down();
-
+			handle_user_input();
+		}
 	} while (game_state != GAME_OVER);
 
 	if (score > high_score) {
@@ -99,4 +97,45 @@ menu:
 	}
 	disable_timer(TIMER0);
 	goto menu;
+}
+
+static void handle_user_input(void)
+{
+	if (buffered_move == NONE)
+		return;
+
+	tetromino_hide(current_tetromino);
+	if (buffered_move & MOVE_LEFT) {
+		tetromino_move_left(&current_tetromino);
+		buffered_move &= ~MOVE_LEFT;
+	}
+	if (buffered_move & MOVE_RIGHT) {
+		tetromino_move_right(&current_tetromino);
+		buffered_move &= ~MOVE_RIGHT;
+	}
+	if (buffered_move & MOVE_DOWN) {
+		tetromino_move_down(&current_tetromino);
+		buffered_move &= ~MOVE_DOWN;
+	}
+	if (buffered_move & SOFT_DROP) {
+		tetromino_move_down(&current_tetromino);
+		buffered_move &= ~SOFT_DROP;
+	}
+	if (buffered_move & ROTATE) {
+		tetromino_rotate_clockwise(&current_tetromino);
+		buffered_move &= ~ROTATE;
+	}
+	if (buffered_move & HARD_DROP) {
+		tetromino_hard_drop(&current_tetromino);
+		buffered_move &= ~HARD_DROP;
+	}
+	tetromino_draw(current_tetromino);
+}
+
+static inline void enter_power_down(void)
+{
+	LPC_SC->PCON |= (1U << 0);
+	LPC_SC->PCON &= ~(1U << 1);
+
+	__asm volatile("wfi");
 }
