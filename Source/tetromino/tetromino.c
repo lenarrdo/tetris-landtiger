@@ -9,6 +9,7 @@ static void draw_block(struct block square, enum tetromino_color color);
 static void tetromino_shift(volatile struct tetromino *tetromino,
 			    struct block vector);
 static void check_cleared_lines(volatile struct tetromino *tetromino);
+static bool is_block_out_of_bounds(struct block block);
 static inline int max(int *arr, int size);
 
 struct tetromino tetromino_create(enum tetromino_type type,
@@ -178,15 +179,24 @@ void tetromino_rotate_clockwise(volatile struct tetromino *tetromino)
 	if (tetromino->type == O_TYPE)
 		return;
 
-	struct block pivot = { tetromino->blocks[2].x, tetromino->blocks[2].y };
+	struct tetromino tmp_tetromino = *tetromino;
+	struct block pivot = { tmp_tetromino.blocks[2].x,
+			       tmp_tetromino.blocks[2].y };
 
 	for (int i = 0; i < 4; i++) {
-		int dx = tetromino->blocks[i].x - pivot.x;
-		int dy = tetromino->blocks[i].y - pivot.y;
+		int dx = tmp_tetromino.blocks[i].x - pivot.x;
+		int dy = tmp_tetromino.blocks[i].y - pivot.y;
 
-		tetromino->blocks[i].x = -dy + pivot.x;
-		tetromino->blocks[i].y = +dx + pivot.y;
+		tmp_tetromino.blocks[i].x = -dy + pivot.x;
+		tmp_tetromino.blocks[i].y = +dx + pivot.y;
+
+		if (is_block_out_of_bounds(tmp_tetromino.blocks[i]) ||
+		    playing_field_is_occupied(tmp_tetromino.blocks[i].x,
+					      tmp_tetromino.blocks[i].y))
+			return;
 	}
+
+	*tetromino = tmp_tetromino;
 }
 
 /********************
@@ -241,6 +251,13 @@ static void tetromino_shift(volatile struct tetromino *tetromino,
 		tetromino->blocks[i].x += offset.x;
 		tetromino->blocks[i].y += offset.y;
 	}
+}
+
+static bool is_block_out_of_bounds(struct block block)
+{
+	return block.x < PLAYING_FIELD_LEFT_BORDER ||
+	       block.x > PLAYING_FIELD_RIGHT_BORDER ||
+	       block.y < PLAYING_FIELD_TOP || block.y > PLAYING_FIELD_BOTTOM;
 }
 
 static inline int max(int *arr, int size)
