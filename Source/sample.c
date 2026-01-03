@@ -22,12 +22,12 @@ extern uint8_t ScaleFlag;
 // #define FIFTY_MSEC (ONE_SECOND / 20)
 #endif
 
-int high_score;
-int score;
-int tot_cleared_lines;
-enum game_state game_state;
-struct tetromino current_tetromino;
-unsigned int buffered_move;
+volatile int high_score;
+volatile int score;
+volatile int tot_cleared_lines;
+volatile enum game_state game_state;
+volatile struct tetromino current_tetromino;
+volatile unsigned int buffered_move;
 
 static void handle_user_input(void);
 static inline void enter_power_down(void);

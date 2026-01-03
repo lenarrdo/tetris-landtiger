@@ -6,8 +6,9 @@
 #define MAX_CLEARABLE_LINES 4
 
 static void draw_block(struct block square, enum tetromino_color color);
-static void tetromino_shift(struct tetromino *tetromino, struct block vector);
-static void check_cleared_lines(struct tetromino *tetromino);
+static void tetromino_shift(volatile struct tetromino *tetromino,
+			    struct block vector);
+static void check_cleared_lines(volatile struct tetromino *tetromino);
 static inline int max(int *arr, int size);
 
 struct tetromino tetromino_create(enum tetromino_type type,
@@ -126,7 +127,7 @@ void tetromino_hide(struct tetromino tetromino)
 		draw_block(tetromino.blocks[i], HIDDEN);
 }
 
-void tetromino_move_left(struct tetromino *tetromino)
+void tetromino_move_left(volatile struct tetromino *tetromino)
 {
 	for (int i = 0; i < 4; i++)
 		if (tetromino->blocks[i].x == PLAYING_FIELD_LEFT_BORDER ||
@@ -137,7 +138,7 @@ void tetromino_move_left(struct tetromino *tetromino)
 	tetromino_shift(tetromino, (struct block){ -1, 0 });
 }
 
-void tetromino_move_right(struct tetromino *tetromino)
+void tetromino_move_right(volatile struct tetromino *tetromino)
 {
 	for (int i = 0; i < 4; i++)
 		if (tetromino->blocks[i].x == PLAYING_FIELD_RIGHT_BORDER ||
@@ -148,7 +149,7 @@ void tetromino_move_right(struct tetromino *tetromino)
 	tetromino_shift(tetromino, (struct block){ 1, 0 });
 }
 
-void tetromino_move_down(struct tetromino *tetromino)
+void tetromino_move_down(volatile struct tetromino *tetromino)
 {
 	for (int i = 0; i < 4; i++)
 		if (playing_field_is_occupied(tetromino->blocks[i].x,
@@ -166,13 +167,13 @@ void tetromino_move_down(struct tetromino *tetromino)
 	tetromino_shift(tetromino, (struct block){ 0, 1 });
 }
 
-void tetromino_hard_drop(struct tetromino *tetromino)
+void tetromino_hard_drop(volatile struct tetromino *tetromino)
 {
 	while (!tetromino->placed)
 		tetromino_move_down(tetromino);
 }
 
-void tetromino_rotate_clockwise(struct tetromino *tetromino)
+void tetromino_rotate_clockwise(volatile struct tetromino *tetromino)
 {
 	if (tetromino->type == O_TYPE)
 		return;
@@ -203,7 +204,7 @@ static void draw_block(struct block block, enum tetromino_color color)
 			LCD_SetPoint(i, j, color);
 }
 
-static void check_cleared_lines(struct tetromino *tetromino)
+static void check_cleared_lines(volatile struct tetromino *tetromino)
 {
 	int cleared_lines[MAX_CLEARABLE_LINES] = { -1, -1, -1, -1 };
 	int nof_cleared_lines = 0;
@@ -233,7 +234,8 @@ static void check_cleared_lines(struct tetromino *tetromino)
 	}
 }
 
-static void tetromino_shift(struct tetromino *tetromino, struct block offset)
+static void tetromino_shift(volatile struct tetromino *tetromino,
+			    struct block offset)
 {
 	for (int i = 0; i < 4; i++) {
 		tetromino->blocks[i].x += offset.x;

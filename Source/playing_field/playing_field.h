@@ -34,7 +34,7 @@ bool playing_field_is_complete_row(int line);
 
 bool playing_field_is_occupied(int pos_x, int pos_y);
 
-void playing_field_add_tetromino(struct tetromino *tetromino);
+void playing_field_add_tetromino(volatile struct tetromino *tetromino);
 
 void visualize_score(void);
 void visualize_top(void);

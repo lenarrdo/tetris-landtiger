@@ -53,7 +53,7 @@ bool playing_field_is_occupied(int pos_x, int pos_y)
 	return playing_field[pos_x][pos_y] != HIDDEN;
 }
 
-void playing_field_add_tetromino(struct tetromino *tetromino)
+void playing_field_add_tetromino(volatile struct tetromino *tetromino)
 {
 	for (int i = 0; i < 4; i++) {
 		playing_field[tetromino->blocks[i].x][tetromino->blocks[i].y] =

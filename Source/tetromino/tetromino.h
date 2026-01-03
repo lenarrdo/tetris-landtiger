@@ -61,10 +61,10 @@ void tetromino_draw(struct tetromino tetromino);
 void tetromino_hide(struct tetromino tetromino);
 
 // movement
-void tetromino_move_left(struct tetromino *tetromino);
-void tetromino_move_right(struct tetromino *tetromino);
-void tetromino_move_down(struct tetromino *tetromino);
-void tetromino_hard_drop(struct tetromino *tetromino);
-void tetromino_rotate_clockwise(struct tetromino *tetromino);
+void tetromino_move_left(volatile struct tetromino *tetromino);
+void tetromino_move_right(volatile struct tetromino *tetromino);
+void tetromino_move_down(volatile struct tetromino *tetromino);
+void tetromino_hard_drop(volatile struct tetromino *tetromino);
+void tetromino_rotate_clockwise(volatile struct tetromino *tetromino);
 
 #endif // TETROMINO_H_
