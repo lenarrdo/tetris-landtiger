@@ -31,13 +31,13 @@ void playing_field_draw(void)
 	draw_vertical_wall(MAX_X - VERTICAL_BORDER_WIDTH, 0, MAX_Y);
 
 	GUI_Text(170, 90, (uint8_t *)"TOP", TEXT_COLOR, BACKGROUND_COLOR);
-	GUI_Text(170, 110, (uint8_t *)"000000", TEXT_COLOR, BACKGROUND_COLOR);
+	visualize_top();
 
 	GUI_Text(170, 140, (uint8_t *)"SCORE", TEXT_COLOR, BACKGROUND_COLOR);
-	GUI_Text(170, 160, (uint8_t *)"000000", TEXT_COLOR, BACKGROUND_COLOR);
+	visualize_score();
 
 	GUI_Text(170, 190, (uint8_t *)"LINES", TEXT_COLOR, BACKGROUND_COLOR);
-	GUI_Text(170, 210, (uint8_t *)"000000", TEXT_COLOR, BACKGROUND_COLOR);
+	visualize_lines();
 }
 
 void playing_field_reset(void)
