@@ -7,7 +7,6 @@
 static void tetromino_shift(volatile struct tetromino *tetromino,
 			    struct block vector);
 static void check_cleared_lines(volatile struct tetromino *tetromino);
-static bool is_block_out_of_bounds(struct block block);
 static inline int max(int *arr, int size);
 
 struct tetromino tetromino_create(enum tetromino_type type,
@@ -181,6 +180,13 @@ void tetromino_rotate_clockwise(volatile struct tetromino *tetromino)
 	*tetromino = tmp_tetromino;
 }
 
+bool is_block_out_of_bounds(struct block block)
+{
+	return block.x < PLAYING_FIELD_LEFT_BORDER ||
+	       block.x > PLAYING_FIELD_RIGHT_BORDER ||
+	       block.y < PLAYING_FIELD_TOP || block.y > PLAYING_FIELD_BOTTOM;
+}
+
 /********************
  * HELPER FUNCTIONS *
  ********************/
@@ -218,13 +224,6 @@ static void tetromino_shift(volatile struct tetromino *tetromino,
 		tetromino->blocks[i].x += offset.x;
 		tetromino->blocks[i].y += offset.y;
 	}
-}
-
-static bool is_block_out_of_bounds(struct block block)
-{
-	return block.x < PLAYING_FIELD_LEFT_BORDER ||
-	       block.x > PLAYING_FIELD_RIGHT_BORDER ||
-	       block.y < PLAYING_FIELD_TOP || block.y > PLAYING_FIELD_BOTTOM;
 }
 
 static inline int max(int *arr, int size)

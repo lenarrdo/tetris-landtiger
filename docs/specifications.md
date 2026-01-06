@@ -60,7 +60,7 @@ The display of the LandTiger should show:
   - [x] A tetris awards 600 points plus the 10 points from the tetromino placement.
 
 - **Lose conditions**:
-  - [?] The game finishes when the placed tetromino goes over the top of the playing field. (considering how things are currently implemented, this event never occurs.)
+  - [x] The game finishes when the placed tetromino goes over the top of the playing field.
   - [x] If the generated tetromino that appears at the top of the field overlaps with another block, the game ends as well.
 
 - **Game end**:

@@ -24,6 +24,7 @@ extern uint8_t ScaleFlag;
 #endif
 
 static void handle_user_input(void);
+static inline bool lose_conditions(void);
 static inline void enter_power_down(void);
 
 int main(void)
@@ -71,16 +72,13 @@ menu:
 	enable_timer(TIMER0);
 
 	game_state = PLAYING;
-	do {
+	while (game_state != GAME_OVER) {
 		current_tetromino = tetromino_create(rand() % NOF_TETROMINOS,
 						     (struct block){ 3, 0 });
 		tetromino_draw(current_tetromino);
 
-		for (int i = 0; game_state != GAME_OVER && i < 4; i++)
-			if (playing_field_is_occupied(
-				    current_tetromino.blocks[i].x,
-				    current_tetromino.blocks[i].y))
-				game_state = GAME_OVER;
+		if (lose_conditions())
+			game_state = GAME_OVER;
 
 		int prev_tot_cleared_lines = tot_cleared_lines;
 		while (!current_tetromino.placed) {
@@ -94,8 +92,7 @@ menu:
 			playing_field_redraw(lowest_cleared_line,
 					     cleared_lines);
 		}
-	} while (game_state != GAME_OVER);
-
+	}
 	if (score > high_score)
 		high_score = score;
 	disable_timer(TIMER0);
@@ -134,6 +131,16 @@ static void handle_user_input(void)
 		buffered_move &= ~HARD_DROP;
 	}
 	tetromino_draw(current_tetromino);
+}
+
+static inline bool lose_conditions(void)
+{
+	for (int i = 0; i < 4; i++)
+		if (playing_field_is_occupied(current_tetromino.blocks[i].x,
+					      current_tetromino.blocks[i].y) ||
+		    is_block_out_of_bounds(current_tetromino.blocks[i]))
+			return true;
+	return false;
 }
 
 static inline void enter_power_down(void)
