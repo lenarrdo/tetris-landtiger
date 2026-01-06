@@ -46,8 +46,17 @@ int main(void)
 	high_score = 0;
 
 menu:
+	game_state = PAUSED;
+	score = 0;
+	tot_cleared_lines = 0;
+	buffered_move = NONE;
+
+	init_playing_borders();
+	show_default_stats();
+	playing_field_reset();
+
 	enable_timer(TIMER1);
-	LCD_Clear(Blue);
+
 	while (game_state == PAUSED)
 		enter_power_down();
 
@@ -57,20 +66,12 @@ menu:
 
 	srand(get_timer_value(TIMER1));
 	disable_timer(TIMER1);
-
-	score = 0;
-	tot_cleared_lines = 0;
-	buffered_move = NONE;
-
-	playing_field_reset();
-	init_playing_borders();
-	show_default_stats();
+	reset_timer(TIMER1);
 
 	enable_timer(TIMER0);
 
 	game_state = PLAYING;
 	do {
-		int prev_tot_cleared_lines = tot_cleared_lines;
 		current_tetromino = tetromino_create(rand() % NOF_TETROMINOS,
 						     (struct block){ 3, 0 });
 		tetromino_draw(current_tetromino);
@@ -81,6 +82,7 @@ menu:
 				    current_tetromino.blocks[i].y))
 				game_state = GAME_OVER;
 
+		int prev_tot_cleared_lines = tot_cleared_lines;
 		while (!current_tetromino.placed) {
 			enter_power_down();
 			handle_user_input();
@@ -94,11 +96,10 @@ menu:
 		}
 	} while (game_state != GAME_OVER);
 
-	if (score > high_score) {
+	if (score > high_score)
 		high_score = score;
-		visualize_top();
-	}
 	disable_timer(TIMER0);
+	reset_timer(TIMER0);
 	goto menu;
 }
 
