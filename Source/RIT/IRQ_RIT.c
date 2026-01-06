@@ -69,7 +69,7 @@ static inline void handle_key1_press(void)
 				game_state = PAUSED;
 				break;
 			case GAME_OVER:
-				// TODO: reset playing field and goto menu.
+				game_state = PAUSED;
 				break;
 			}
 			break;

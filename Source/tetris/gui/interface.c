@@ -31,7 +31,19 @@ void show_paused_popup(void)
 		GUI_Text(165, 240 + 15 * i, msg[i], Red, BACKGROUND_COLOR);
 }
 
-void hide_paused_popup(void)
+void show_game_over_popup(void)
+{
+	uint8_t msg[4][9] = {
+		"--------",
+		"  GAME  ",
+		"  OVER  ",
+		"--------",
+	};
+	for (int i = 0; i < 4; i++)
+		GUI_Text(165, 240 + 15 * i, msg[i], Red, BACKGROUND_COLOR);
+}
+
+void hide_popup(void)
 {
 	uint8_t msg[4][9] = {
 		"        ",

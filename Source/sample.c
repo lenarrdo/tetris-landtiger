@@ -55,6 +55,7 @@ menu:
 	init_playing_borders();
 	show_default_stats();
 	playing_field_reset();
+	show_paused_popup();
 
 	enable_timer(TIMER1);
 
@@ -88,7 +89,7 @@ menu:
 				if (game_state == PAUSED)
 					show_paused_popup();
 				else if (game_state == PLAYING)
-					hide_paused_popup();
+					hide_popup();
 				prev_game_state = game_state;
 			}
 			if (game_state == PLAYING)
@@ -106,6 +107,9 @@ menu:
 		high_score = score;
 	disable_timer(TIMER0);
 	reset_timer(TIMER0);
+	show_game_over_popup();
+	while (game_state == GAME_OVER)
+		enter_power_down();
 	goto menu;
 }
 
