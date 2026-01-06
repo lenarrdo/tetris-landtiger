@@ -4,7 +4,7 @@
 #include <stdbool.h>
 
 #include "GLCD/GLCD.h"
-#include "tetris/gui/playing_field.h"
+#include "playing_field.h"
 
 #define NOF_TETROMINOS 7
 #define BLOCK_LEN (PLAYING_FIELD_WIDTH_PX / 10) // pixels
@@ -27,7 +27,7 @@ enum tetromino_color {
 	L_COLOR = Orange,
 	S_COLOR = Green,
 	Z_COLOR = Red,
-	HIDDEN = BACKGROUND_COLOR,
+	HIDDEN = Black,
 };
 
 enum tetromino_moves {

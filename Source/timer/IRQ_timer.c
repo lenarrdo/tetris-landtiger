@@ -1,8 +1,8 @@
 #include "LPC17xx.h"
-#include "timer.h"
-#include "tetris/game_stats.h"
 #include "RIT/RIT.h"
-#include "tetris/tetromino.h"
+#include "tetris/core/stats.h"
+#include "tetris/core/tetromino.h"
+#include "timer.h"
 
 void TIMER0_IRQHandler(void)
 {

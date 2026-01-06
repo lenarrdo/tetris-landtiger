@@ -5,9 +5,10 @@
 #include "RIT/RIT.h"
 #include "button_EXINT/button.h"
 #include "joystick/joystick.h"
-#include "tetris/game_stats.h"
-#include "tetris/gui/playing_field.h"
-#include "tetris/tetromino.h"
+#include "tetris/core/stats.h"
+#include "tetris/core/playing_field.h"
+#include "tetris/core/tetromino.h"
+#include "tetris/gui/gui.h"
 #include "timer/timer.h"
 
 // ScaleFlag needs to visible in order for the emulator to find the symbol (can
@@ -21,13 +22,6 @@ extern uint8_t ScaleFlag;
 // #define ONE_SECOND (25000000)
 // #define FIFTY_MSEC (ONE_SECOND / 20)
 #endif
-
-volatile int high_score;
-volatile int score;
-volatile int tot_cleared_lines;
-volatile enum game_state game_state;
-volatile struct tetromino current_tetromino;
-volatile unsigned int buffered_move;
 
 static void handle_user_input(void);
 static inline void enter_power_down(void);
@@ -69,12 +63,14 @@ menu:
 	buffered_move = NONE;
 
 	playing_field_reset();
-	playing_field_draw();
+	init_playing_borders();
+	show_default_stats();
 
 	enable_timer(TIMER0);
 
 	game_state = PLAYING;
 	do {
+		int prev_tot_cleared_lines = tot_cleared_lines;
 		current_tetromino = tetromino_create(rand() % NOF_TETROMINOS,
 						     (struct block){ 3, 0 });
 		tetromino_draw(current_tetromino);
@@ -88,6 +84,13 @@ menu:
 		while (!current_tetromino.placed) {
 			enter_power_down();
 			handle_user_input();
+		}
+		visualize_score();
+		int cleared_lines = tot_cleared_lines - prev_tot_cleared_lines;
+		if (cleared_lines > 0) {
+			visualize_lines();
+			playing_field_redraw(lowest_cleared_line,
+					     cleared_lines);
 		}
 	} while (game_state != GAME_OVER);
 

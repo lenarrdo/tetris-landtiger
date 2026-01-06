@@ -613,29 +613,59 @@
           <GroupName>tetris</GroupName>
           <Files>
             <File>
-              <FileName>game_stats.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\tetris\game_stats.h</FilePath>
-            </File>
-            <File>
-              <FileName>tetromino.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\tetris\tetromino.c</FilePath>
-            </File>
-            <File>
-              <FileName>tetromino.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\tetris\tetromino.h</FilePath>
-            </File>
-            <File>
               <FileName>playing_field.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Source\tetris\gui\playing_field.c</FilePath>
+              <FilePath>.\Source\tetris\core\playing_field.c</FilePath>
             </File>
             <File>
               <FileName>playing_field.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\Source\tetris\gui\playing_field.h</FilePath>
+              <FilePath>.\Source\tetris\core\playing_field.h</FilePath>
+            </File>
+            <File>
+              <FileName>stats.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\tetris\core\stats.c</FilePath>
+            </File>
+            <File>
+              <FileName>stats.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\tetris\core\stats.h</FilePath>
+            </File>
+            <File>
+              <FileName>tetromino.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\tetris\core\tetromino.c</FilePath>
+            </File>
+            <File>
+              <FileName>tetromino.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\tetris\core\tetromino.h</FilePath>
+            </File>
+            <File>
+              <FileName>gui.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\tetris\gui\gui.h</FilePath>
+            </File>
+            <File>
+              <FileName>interface.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\tetris\gui\interface.c</FilePath>
+            </File>
+            <File>
+              <FileName>playing_field_view.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\tetris\gui\playing_field_view.c</FilePath>
+            </File>
+            <File>
+              <FileName>stats_view.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\tetris\gui\stats_view.c</FilePath>
+            </File>
+            <File>
+              <FileName>tetromino_view.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\tetris\gui\tetromino_view.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1200,29 +1230,59 @@
           <GroupName>tetris</GroupName>
           <Files>
             <File>
-              <FileName>game_stats.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\tetris\game_stats.h</FilePath>
-            </File>
-            <File>
-              <FileName>tetromino.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\tetris\tetromino.c</FilePath>
-            </File>
-            <File>
-              <FileName>tetromino.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\tetris\tetromino.h</FilePath>
-            </File>
-            <File>
               <FileName>playing_field.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Source\tetris\gui\playing_field.c</FilePath>
+              <FilePath>.\Source\tetris\core\playing_field.c</FilePath>
             </File>
             <File>
               <FileName>playing_field.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\Source\tetris\gui\playing_field.h</FilePath>
+              <FilePath>.\Source\tetris\core\playing_field.h</FilePath>
+            </File>
+            <File>
+              <FileName>stats.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\tetris\core\stats.c</FilePath>
+            </File>
+            <File>
+              <FileName>stats.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\tetris\core\stats.h</FilePath>
+            </File>
+            <File>
+              <FileName>tetromino.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\tetris\core\tetromino.c</FilePath>
+            </File>
+            <File>
+              <FileName>tetromino.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\tetris\core\tetromino.h</FilePath>
+            </File>
+            <File>
+              <FileName>gui.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\tetris\gui\gui.h</FilePath>
+            </File>
+            <File>
+              <FileName>interface.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\tetris\gui\interface.c</FilePath>
+            </File>
+            <File>
+              <FileName>playing_field_view.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\tetris\gui\playing_field_view.c</FilePath>
+            </File>
+            <File>
+              <FileName>stats_view.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\tetris\gui\stats_view.c</FilePath>
+            </File>
+            <File>
+              <FileName>tetromino_view.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\tetris\gui\tetromino_view.c</FilePath>
             </File>
           </Files>
         </Group>

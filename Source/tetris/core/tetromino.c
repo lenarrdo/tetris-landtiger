@@ -1,11 +1,9 @@
 #include "tetromino.h"
-#include "tetris/gui/playing_field.h"
-#include "GLCD/GLCD.h"
-#include "tetris/game_stats.h"
+#include "playing_field.h"
+#include "stats.h"
 
 #define MAX_CLEARABLE_LINES 4
 
-static void draw_block(struct block square, enum tetromino_color color);
 static void tetromino_shift(volatile struct tetromino *tetromino,
 			    struct block vector);
 static void check_cleared_lines(volatile struct tetromino *tetromino);
@@ -113,21 +111,6 @@ struct tetromino tetromino_create(enum tetromino_type type,
 	return new_tetromino;
 }
 
-void tetromino_draw(struct tetromino tetromino)
-{
-	if (tetromino.color == HIDDEN)
-		return;
-
-	for (int i = 0; i < 4; i++)
-		draw_block(tetromino.blocks[i], tetromino.color);
-}
-
-void tetromino_hide(struct tetromino tetromino)
-{
-	for (int i = 0; i < 4; i++)
-		draw_block(tetromino.blocks[i], HIDDEN);
-}
-
 void tetromino_move_left(volatile struct tetromino *tetromino)
 {
 	for (int i = 0; i < 4; i++)
@@ -159,7 +142,6 @@ void tetromino_move_down(volatile struct tetromino *tetromino)
 			playing_field_add_tetromino(tetromino);
 			tetromino->placed = true;
 			score += 10;
-			visualize_score();
 
 			check_cleared_lines(tetromino);
 			return;
@@ -203,17 +185,6 @@ void tetromino_rotate_clockwise(volatile struct tetromino *tetromino)
  * HELPER FUNCTIONS *
  ********************/
 
-static void draw_block(struct block block, enum tetromino_color color)
-{
-	struct block upper_left = { block.x * BLOCK_LEN + VERTICAL_BORDER_WIDTH,
-				    block.y * BLOCK_LEN +
-					    HORIZONTAL_BORDER_WIDTH };
-
-	for (int i = upper_left.x; i < upper_left.x + BLOCK_LEN; i++)
-		for (int j = upper_left.y; j < upper_left.y + BLOCK_LEN; j++)
-			LCD_SetPoint(i, j, color);
-}
-
 static void check_cleared_lines(volatile struct tetromino *tetromino)
 {
 	int cleared_lines[MAX_CLEARABLE_LINES] = { -1, -1, -1, -1 };
@@ -230,14 +201,10 @@ static void check_cleared_lines(volatile struct tetromino *tetromino)
 		score += nof_cleared_lines == MAX_CLEARABLE_LINES ?
 				 600 : // tetris!
 				 100 * nof_cleared_lines;
-		visualize_score();
 		tot_cleared_lines += nof_cleared_lines;
-		visualize_lines();
 
-		int lowest_cleared_line =
-			max(cleared_lines, MAX_CLEARABLE_LINES);
+		lowest_cleared_line = max(cleared_lines, MAX_CLEARABLE_LINES);
 		playing_field_compress_empty_rows(lowest_cleared_line);
-		playing_field_redraw(lowest_cleared_line, nof_cleared_lines);
 
 		// to ensure that the tetromino doesn't get redrawn after the lines have been cleared
 		tetromino->color = HIDDEN;
