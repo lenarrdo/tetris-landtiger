@@ -21,6 +21,8 @@ void visualize_lines(void);
 
 // interfaces
 void init_playing_borders(void);
+void show_paused_popup(void);
+void hide_paused_popup(void);
 
 // tetromino
 void tetromino_draw(struct tetromino tetromino);

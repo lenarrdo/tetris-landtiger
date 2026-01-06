@@ -71,6 +71,7 @@ menu:
 
 	enable_timer(TIMER0);
 
+	enum game_state prev_game_state = PAUSED;
 	game_state = PLAYING;
 	while (game_state != GAME_OVER) {
 		current_tetromino = tetromino_create(rand() % NOF_TETROMINOS,
@@ -83,7 +84,15 @@ menu:
 		int prev_tot_cleared_lines = tot_cleared_lines;
 		while (!current_tetromino.placed) {
 			enter_power_down();
-			handle_user_input();
+			if (prev_game_state != game_state) {
+				if (game_state == PAUSED)
+					show_paused_popup();
+				else if (game_state == PLAYING)
+					hide_paused_popup();
+				prev_game_state = game_state;
+			}
+			if (game_state == PLAYING)
+				handle_user_input();
 		}
 		visualize_score();
 		int cleared_lines = tot_cleared_lines - prev_tot_cleared_lines;
