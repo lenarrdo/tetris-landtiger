@@ -25,30 +25,31 @@ void RIT_IRQHandler(void)
 	if (down_1 != 0)
 		handle_key1_press();
 
-	if (down_2 != 0)
-		handle_key2_press();
+	if (game_state == PLAYING) {
+		if (down_2 != 0)
+			handle_key2_press();
 
-	if ((LPC_GPIO1->FIOPIN & (1 << 29)) == 0)
-		handle_joystick_up();
-	else
-		joystick_up = 0;
+		if ((LPC_GPIO1->FIOPIN & (1 << 29)) == 0)
+			handle_joystick_up();
+		else
+			joystick_up = 0;
 
-	if ((LPC_GPIO1->FIOPIN & (1 << 26)) == 0)
-		handle_joystick_down();
-	else
-		joystick_down = 0;
+		if ((LPC_GPIO1->FIOPIN & (1 << 26)) == 0)
+			handle_joystick_down();
+		else
+			joystick_down = 0;
 
-	if ((LPC_GPIO1->FIOPIN & (1 << 28)) == 0)
-		handle_joystick_right();
-	else
-		joystick_right = 0;
+		if ((LPC_GPIO1->FIOPIN & (1 << 28)) == 0)
+			handle_joystick_right();
+		else
+			joystick_right = 0;
 
-	if ((LPC_GPIO1->FIOPIN & (1 << 27)) == 0)
-		handle_joystick_left();
-	else
-		joystick_left = 0;
+		if ((LPC_GPIO1->FIOPIN & (1 << 27)) == 0)
+			handle_joystick_left();
+		else
+			joystick_left = 0;
+	}
 
-	// reset_RIT();
 	LPC_RIT->RICTRL |= 0x1;
 }
 

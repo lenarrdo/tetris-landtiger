@@ -1,6 +1,7 @@
 #include "button.h"
 #include "LPC17xx.h"
 #include "RIT/RIT.h"
+#include "tetris/core/stats.h"
 
 #define CLEAR_PENDING_INTERRUPT(button) (LPC_SC->EXTINT &= (1 << (button)))
 
@@ -20,9 +21,10 @@ void EINT1_IRQHandler(void)
 
 void EINT2_IRQHandler(void)
 {
-	down_2 = 1;
-	NVIC_DisableIRQ(EINT2_IRQn);
-	LPC_PINCON->PINSEL4 &= ~(1 << 24);
-
+	if (game_state == PLAYING) {
+		down_2 = 1;
+		NVIC_DisableIRQ(EINT2_IRQn);
+		LPC_PINCON->PINSEL4 &= ~(1 << 24);
+	}
 	CLEAR_PENDING_INTERRUPT(2);
 }
