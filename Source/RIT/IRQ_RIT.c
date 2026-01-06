@@ -1,7 +1,7 @@
 #include "LPC17xx.h"
 #include "RIT.h"
-#include "game_stats.h"
-#include "tetromino/tetromino.h"
+#include "tetris/game_stats.h"
+#include "tetris/tetromino.h"
 #include "timer.h"
 
 volatile int down_1 = 0;

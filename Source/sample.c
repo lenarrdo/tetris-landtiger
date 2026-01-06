@@ -1,14 +1,14 @@
 #include <stdlib.h>
 
-#include "LPC17xx.h"
 #include "GLCD/GLCD.h"
+#include "LPC17xx.h"
 #include "RIT/RIT.h"
-#include "tetromino/tetromino.h"
-#include "playing_field/playing_field.h"
-#include "game_stats.h"
 #include "button_EXINT/button.h"
-#include "timer/timer.h"
 #include "joystick/joystick.h"
+#include "tetris/game_stats.h"
+#include "tetris/gui/playing_field.h"
+#include "tetris/tetromino.h"
+#include "timer/timer.h"
 
 // ScaleFlag needs to visible in order for the emulator to find the symbol (can
 // be placed also inside system_LPC17xx.h but since it is RO, it needs more

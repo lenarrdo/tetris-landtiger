@@ -1,7 +1,7 @@
 #include "tetromino.h"
-#include "playing_field/playing_field.h"
+#include "tetris/gui/playing_field.h"
 #include "GLCD/GLCD.h"
-#include "game_stats.h"
+#include "tetris/game_stats.h"
 
 #define MAX_CLEARABLE_LINES 4
 

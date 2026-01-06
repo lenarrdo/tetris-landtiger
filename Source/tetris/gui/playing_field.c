@@ -2,9 +2,9 @@
 #include <stdint.h>
 
 #include "playing_field.h"
-#include "tetromino/tetromino.h"
+#include "tetris/tetromino.h"
 #include "GLCD/GLCD.h"
-#include "game_stats.h"
+#include "tetris/game_stats.h"
 
 #define MAX_DIGITS 6
 

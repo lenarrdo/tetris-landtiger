@@ -4,7 +4,7 @@
 #include <stdbool.h>
 
 #include "GLCD/GLCD.h"
-#include "playing_field/playing_field.h"
+#include "tetris/gui/playing_field.h"
 
 #define NOF_TETROMINOS 7
 #define BLOCK_LEN (PLAYING_FIELD_WIDTH_PX / 10) // pixels

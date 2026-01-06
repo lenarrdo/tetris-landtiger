@@ -554,36 +554,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>tetromino</GroupName>
-          <Files>
-            <File>
-              <FileName>tetromino.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\tetromino\tetromino.c</FilePath>
-            </File>
-            <File>
-              <FileName>tetromino.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\tetromino\tetromino.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>playing_field</GroupName>
-          <Files>
-            <File>
-              <FileName>playing_field.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\playing_field\playing_field.c</FilePath>
-            </File>
-            <File>
-              <FileName>playing_field.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\playing_field\playing_field.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>button_EXINT</GroupName>
           <Files>
             <File>
@@ -636,6 +606,36 @@
               <FileName>joystick.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Source\joystick\joystick.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>tetris</GroupName>
+          <Files>
+            <File>
+              <FileName>game_stats.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\tetris\game_stats.h</FilePath>
+            </File>
+            <File>
+              <FileName>tetromino.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\tetris\tetromino.c</FilePath>
+            </File>
+            <File>
+              <FileName>tetromino.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\tetris\tetromino.h</FilePath>
+            </File>
+            <File>
+              <FileName>playing_field.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\tetris\gui\playing_field.c</FilePath>
+            </File>
+            <File>
+              <FileName>playing_field.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\tetris\gui\playing_field.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1141,36 +1141,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>tetromino</GroupName>
-          <Files>
-            <File>
-              <FileName>tetromino.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\tetromino\tetromino.c</FilePath>
-            </File>
-            <File>
-              <FileName>tetromino.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\tetromino\tetromino.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>playing_field</GroupName>
-          <Files>
-            <File>
-              <FileName>playing_field.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\playing_field\playing_field.c</FilePath>
-            </File>
-            <File>
-              <FileName>playing_field.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\playing_field\playing_field.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>button_EXINT</GroupName>
           <Files>
             <File>
@@ -1223,6 +1193,36 @@
               <FileName>joystick.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Source\joystick\joystick.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>tetris</GroupName>
+          <Files>
+            <File>
+              <FileName>game_stats.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\tetris\game_stats.h</FilePath>
+            </File>
+            <File>
+              <FileName>tetromino.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\tetris\tetromino.c</FilePath>
+            </File>
+            <File>
+              <FileName>tetromino.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\tetris\tetromino.h</FilePath>
+            </File>
+            <File>
+              <FileName>playing_field.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\tetris\gui\playing_field.c</FilePath>
+            </File>
+            <File>
+              <FileName>playing_field.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\tetris\gui\playing_field.h</FilePath>
             </File>
           </Files>
         </Group>
