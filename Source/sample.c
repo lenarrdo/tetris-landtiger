@@ -76,8 +76,10 @@ menu:
 						     (struct block){ 3, 0 });
 		tetromino_draw(current_tetromino);
 
-		if (lose_conditions())
+		if (lose_conditions()) {
 			game_state = GAME_OVER;
+			continue;
+		}
 
 		int prev_tot_cleared_lines = tot_cleared_lines;
 		while (!current_tetromino.placed) {
@@ -102,11 +104,14 @@ menu:
 	}
 	if (score > high_score)
 		high_score = score;
+
 	disable_timer(TIMER0);
 	reset_timer(TIMER0);
+
 	show_game_over_popup();
 	while (game_state == GAME_OVER)
 		enter_power_down();
+
 	goto menu;
 }
 
