@@ -133,10 +133,6 @@ static void handle_user_input(void)
 		tetromino_move_down(&current_tetromino);
 		buffered_move &= ~MOVE_DOWN;
 	}
-	if (buffered_move & SOFT_DROP) {
-		tetromino_move_down(&current_tetromino);
-		buffered_move &= ~SOFT_DROP;
-	}
 	if (buffered_move & ROTATE) {
 		tetromino_rotate_clockwise(&current_tetromino);
 		buffered_move &= ~ROTATE;

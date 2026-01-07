@@ -36,8 +36,7 @@ enum tetromino_moves {
 	MOVE_RIGHT = 1 << 1,
 	MOVE_DOWN = 1 << 2,
 	ROTATE = 1 << 3,
-	SOFT_DROP = 1 << 4,
-	HARD_DROP = 1 << 5
+	HARD_DROP = 1 << 4
 };
 
 struct block {
