@@ -211,9 +211,6 @@ static void check_cleared_lines(volatile struct tetromino *tetromino)
 
 		lowest_cleared_line = max(cleared_lines, MAX_CLEARABLE_LINES);
 		playing_field_compress_empty_rows(lowest_cleared_line);
-
-		// to ensure that the tetromino doesn't get redrawn after the lines have been cleared
-		tetromino->color = HIDDEN;
 	}
 }
 
