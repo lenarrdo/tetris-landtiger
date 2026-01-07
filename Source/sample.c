@@ -32,7 +32,7 @@ int main(void)
 
 	BUTTON_init();
 
-	init_RIT(ONE_SECOND / 10);
+	init_RIT(ONE_SECOND / 5);
 	enable_RIT();
 
 	joystick_init();
