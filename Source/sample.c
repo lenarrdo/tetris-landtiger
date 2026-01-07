@@ -11,16 +11,13 @@
 #include "tetris/gui/gui.h"
 #include "timer/timer.h"
 
+#define ONE_SECOND (25000000)
+
 // ScaleFlag needs to visible in order for the emulator to find the symbol (can
 // be placed also inside system_LPC17xx.h but since it is RO, it needs more
 // work)
 #ifdef SIMULATOR
 extern uint8_t ScaleFlag;
-#define ONE_SECOND (2500000)
-#define FIFTY_MSEC (700000)
-#else
-// #define ONE_SECOND (25000000)
-// #define FIFTY_MSEC (ONE_SECOND / 20)
 #endif
 
 static void handle_user_input(void);
@@ -35,7 +32,7 @@ int main(void)
 
 	BUTTON_init();
 
-	init_RIT(FIFTY_MSEC);
+	init_RIT(ONE_SECOND / 10);
 	enable_RIT();
 
 	joystick_init();
