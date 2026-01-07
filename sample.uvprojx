@@ -400,11 +400,6 @@
               <FileType>1</FileType>
               <FilePath>.\Source\sample.c</FilePath>
             </File>
-            <File>
-              <FileName>game_stats.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\game_stats.h</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -1067,11 +1062,6 @@
               <FileName>sample.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Source\sample.c</FilePath>
-            </File>
-            <File>
-              <FileName>game_stats.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\game_stats.h</FilePath>
             </File>
           </Files>
         </Group>
