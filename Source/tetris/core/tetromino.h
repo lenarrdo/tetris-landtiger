@@ -52,15 +52,9 @@ struct tetromino {
 	bool placed;
 };
 
-// creation
 struct tetromino tetromino_create(enum tetromino_type type,
 				  struct block position);
 
-// visualization
-void tetromino_draw(struct tetromino tetromino);
-void tetromino_hide(struct tetromino tetromino);
-
-// movement
 void tetromino_move_left(volatile struct tetromino *tetromino);
 void tetromino_move_right(volatile struct tetromino *tetromino);
 void tetromino_move_down(volatile struct tetromino *tetromino);
