@@ -662,6 +662,16 @@
               <FileType>1</FileType>
               <FilePath>.\Source\tetris\gui\tetromino_view.c</FilePath>
             </File>
+            <File>
+              <FileName>effects.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\tetris\core\effects.c</FilePath>
+            </File>
+            <File>
+              <FileName>effects.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\tetris\core\effects.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1273,6 +1283,16 @@
               <FileName>tetromino_view.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Source\tetris\gui\tetromino_view.c</FilePath>
+            </File>
+            <File>
+              <FileName>effects.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\tetris\core\effects.c</FilePath>
+            </File>
+            <File>
+              <FileName>effects.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\tetris\core\effects.h</FilePath>
             </File>
           </Files>
         </Group>
