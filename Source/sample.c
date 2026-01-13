@@ -48,6 +48,7 @@ menu:
 	score = 0;
 	tot_cleared_lines = 0;
 	buffered_move = NONE;
+	int lines_since_last_powerup = 0;
 
 	init_playing_borders();
 	show_default_stats();
@@ -100,6 +101,17 @@ menu:
 			visualize_lines();
 			playing_field_redraw(lowest_cleared_line,
 					     cleared_lines);
+
+			lines_since_last_powerup += cleared_lines;
+			if (lines_since_last_powerup >= NOF_LINES_FOR_POWERUP) {
+				struct block powerup_pos =
+					playing_field_spawn_random_powerup();
+				playing_field_redraw_block(powerup_pos.x,
+							   powerup_pos.y);
+
+				lines_since_last_powerup -=
+					NOF_LINES_FOR_POWERUP;
+			}
 		}
 	}
 	if (score > high_score)

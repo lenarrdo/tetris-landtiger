@@ -32,5 +32,6 @@ void tetromino_draw_block(struct block block, enum tetromino_color color);
 
 // playing field
 void playing_field_redraw(int from_row, int nof_cleared_lines);
+void playing_field_redraw_block(int x, int y);
 
 #endif // GUI_H_
