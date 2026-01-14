@@ -2,7 +2,7 @@
 #define EFFECTS_H_
 
 #define NOF_POWERUPS 2
-#define NOF_LINES_FOR_POWERUP 5
+#define NOF_LINES_FOR_POWERUP 3
 
 enum powerup {
 	CLEAR_LINES,
@@ -10,6 +10,7 @@ enum powerup {
 };
 
 struct block effects_powerup_spawn(void);
-int effects_powerup_clear_lines_activate(int row_trigger);
+void effects_powerup_clear_lines_activate(int *cleared_lines,
+					  int *nof_cleared_lines);
 
 #endif // EFFECTS_H_

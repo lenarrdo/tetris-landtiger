@@ -13,8 +13,8 @@
 #include "tetris/gui/gui.h"
 #include "timer/timer.h"
 
-#define ONE_SECOND (25000000)
-#define MAX_CLEARABLE_LINES 4
+#define ONE_SECOND 25000000
+#define MAX_CLEARABLE_LINES 10
 
 // ScaleFlag needs to visible in order for the emulator to find the symbol (can
 // be placed also inside system_LPC17xx.h but since it is RO, it needs more
@@ -27,6 +27,7 @@ static void handle_user_input(void);
 static inline bool lose_conditions(void);
 static inline void enter_power_down(void);
 static inline int max(int *arr, int size);
+static int compute_line_clear_points(int nof_cleared_lines);
 
 int main(void)
 {
@@ -113,9 +114,8 @@ menu:
 
 		score += 10;
 
-		int cleared_lines[MAX_CLEARABLE_LINES] = { -1, -1, -1, -1 };
+		int cleared_lines[MAX_CLEARABLE_LINES] = { 0 };
 		int nof_cleared_lines = 0;
-		int nof_powerup_cleared_lines = 0;
 		for (int i = 0; i < 4; i++) {
 			int curr_line = current_tetromino.blocks[i].y;
 			bool curr_line_is_complete = true;
@@ -143,31 +143,23 @@ menu:
 				cleared_lines[nof_cleared_lines++] = curr_line;
 
 				if (clear_lines_activated)
-					nof_powerup_cleared_lines =
-						effects_powerup_clear_lines_activate(
-							curr_line);
+					effects_powerup_clear_lines_activate(
+						cleared_lines,
+						&nof_cleared_lines);
 			}
 		}
 
 		if (nof_cleared_lines > 0) {
 			// update stats
-			score += nof_cleared_lines == MAX_CLEARABLE_LINES ?
-					 600 : // tetris!
-					 100 * nof_cleared_lines;
-			tot_cleared_lines +=
-				nof_cleared_lines + nof_powerup_cleared_lines;
+			score += compute_line_clear_points(nof_cleared_lines);
+			tot_cleared_lines += nof_cleared_lines;
 
 			// redraw playing field
 			int lowest_cleared_line =
-				nof_powerup_cleared_lines > 0 ?
-					PLAYING_FIELD_BOTTOM :
-					max(cleared_lines, MAX_CLEARABLE_LINES);
-
+				max(cleared_lines, MAX_CLEARABLE_LINES);
 			playing_field_compress_empty_rows(lowest_cleared_line);
-			playing_field_redraw(
-				lowest_cleared_line,
-				peak - (nof_cleared_lines +
-					nof_powerup_cleared_lines));
+			playing_field_redraw(lowest_cleared_line,
+					     peak - nof_cleared_lines);
 
 			// optionally spawn a new powerup
 			lines_since_last_powerup += nof_cleared_lines;
@@ -257,4 +249,15 @@ static inline int max(int *arr, int size)
 		if (arr[i] > max)
 			max = arr[i];
 	return max;
+}
+
+static int compute_line_clear_points(int nof_cleared_lines)
+{
+	int points = 0;
+	while (nof_cleared_lines >= 4) {
+		points += 600;
+		nof_cleared_lines -= 4;
+	}
+
+	return points + 100 * nof_cleared_lines;
 }

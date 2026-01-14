@@ -19,7 +19,8 @@ struct block effects_powerup_spawn(void)
 			filled_x_positions[nof_filled_x_blocks++] = i;
 	int random_x = filled_x_positions[rand() % nof_filled_x_blocks];
 
-	enum powerup random_powerup = rand() % 2;
+	// enum powerup random_powerup = rand() % 2;
+	enum powerup random_powerup = CLEAR_LINES;
 	switch (random_powerup) {
 	case CLEAR_LINES:
 		playing_field[random_x][random_y] = CLEAR_LINES_COLOR;
@@ -32,20 +33,16 @@ struct block effects_powerup_spawn(void)
 	return (struct block){ random_x, random_y };
 }
 
-int effects_powerup_clear_lines_activate(int row_trigger)
+void effects_powerup_clear_lines_activate(int *cleared_lines,
+					  int *nof_cleared_lines)
 {
-	int nof_cleared_lines = 0;
 	int ceiling = peak > PLAYING_FIELD_VSQUARES / 2 ?
 			      peak :
 			      PLAYING_FIELD_VSQUARES / 2;
 
 	for (int row = PLAYING_FIELD_BOTTOM; row >= ceiling; row--)
-		if (row != row_trigger) {
+		if (!playing_field_is_empty_row(row)) {
 			playing_field_clear_row(row);
-			nof_cleared_lines++;
+			cleared_lines[(*nof_cleared_lines)++] = row;
 		}
-
-	return nof_cleared_lines;
-
-	// playing_field_compress_empty_rows(PLAYING_FIELD_BOTTOM);
 }
