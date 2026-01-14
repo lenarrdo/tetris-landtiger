@@ -70,6 +70,19 @@ bool playing_field_is_empty(void)
 	return peak == PLAYING_FIELD_VSQUARES;
 }
 
+bool playing_field_shift_up(int nof_blocks)
+{
+	if (!playing_field_is_empty_row(PLAYING_FIELD_TOP))
+		return false;
+
+	for (int row = 1; row <= PLAYING_FIELD_VSQUARES; row++)
+		playing_field_copy_row(row - nof_blocks, row);
+
+	peak--;
+
+	return true;
+}
+
 /********************
  * HELPER FUNCTIONS *
  ********************/

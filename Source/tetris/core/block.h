@@ -21,6 +21,7 @@ enum block_color {
 
 	CLEAR_LINES_COLOR = Grey,
 	SLOW_DOWN_COLOR = Blue2,
+	RANDOM_MALUS = Dark_Grey,
 
 	HIDDEN = Black,
 };

@@ -19,8 +19,7 @@ struct block effects_powerup_spawn(void)
 			filled_x_positions[nof_filled_x_blocks++] = i;
 	int random_x = filled_x_positions[rand() % nof_filled_x_blocks];
 
-	// enum powerup random_powerup = rand() % 2;
-	enum powerup random_powerup = CLEAR_LINES;
+	enum powerup random_powerup = rand() % NOF_POWERUPS;
 	switch (random_powerup) {
 	case CLEAR_LINES:
 		playing_field[random_x][random_y] = CLEAR_LINES_COLOR;
@@ -45,4 +44,13 @@ void effects_powerup_clear_lines_activate(int *cleared_lines,
 			playing_field_clear_row(row);
 			cleared_lines[(*nof_cleared_lines)++] = row;
 		}
+}
+
+void effects_random_malus_activate(void)
+{
+	playing_field_shift_up(1);
+
+	for (int i = 0; i < PLAYING_FIELD_HSQUARES; i++)
+		if (rand() % 100 < 70)
+			playing_field[i][PLAYING_FIELD_BOTTOM] = Dark_Grey;
 }

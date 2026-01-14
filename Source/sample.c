@@ -54,6 +54,7 @@ menu:
 	tot_cleared_lines = 0;
 	buffered_move = NONE;
 	int lines_since_last_powerup = 0;
+	int lines_since_last_malus = 0;
 
 	init_playing_borders();
 	show_default_stats();
@@ -173,8 +174,17 @@ menu:
 				lines_since_last_powerup -=
 					NOF_LINES_FOR_POWERUP;
 			}
-
 			visualize_lines();
+
+			lines_since_last_malus += nof_cleared_lines;
+			if (lines_since_last_malus >= NOF_LINES_RANDOM_MALUS) {
+				effects_random_malus_activate();
+				playing_field_redraw(PLAYING_FIELD_BOTTOM,
+						     peak);
+
+				lines_since_last_malus -=
+					NOF_LINES_RANDOM_MALUS;
+			}
 		}
 		visualize_score();
 	}
