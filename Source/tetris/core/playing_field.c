@@ -1,8 +1,4 @@
-#include <stdbool.h>
-#include <stdlib.h>
-
 #include "playing_field.h"
-#include "tetromino.h"
 
 enum tetromino_color playing_field[PLAYING_FIELD_HSQUARES]
 				  [PLAYING_FIELD_VSQUARES];
@@ -68,21 +64,6 @@ void playing_field_compress_empty_rows(int from_row)
 		playing_field_clear_row(peak);
 		peak++;
 	}
-}
-
-int playing_field_get_peak(void)
-{
-	return peak;
-}
-
-int playing_field_get_color(int x, int y)
-{
-	return playing_field[x][y];
-}
-
-void playing_field_set_color(int x, int y, enum tetromino_color color)
-{
-	playing_field[x][y] = color;
 }
 
 /********************
