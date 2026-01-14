@@ -7,7 +7,7 @@ static void playing_field_copy_row(int dest_line, int src_line);
 
 void playing_field_reset(void)
 {
-	peak = PLAYING_FIELD_BOTTOM;
+	peak = PLAYING_FIELD_VSQUARES;
 	for (int x = 0; x < PLAYING_FIELD_HSQUARES; x++)
 		for (int y = 0; y < PLAYING_FIELD_VSQUARES; y++)
 			playing_field[x][y] = HIDDEN;
@@ -63,6 +63,11 @@ void playing_field_compress_empty_rows(int from_row)
 		playing_field_clear_row(peak);
 		peak++;
 	}
+}
+
+bool playing_field_is_empty(void)
+{
+	return peak == PLAYING_FIELD_VSQUARES;
 }
 
 /********************

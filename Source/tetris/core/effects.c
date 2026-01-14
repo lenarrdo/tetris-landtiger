@@ -4,7 +4,7 @@
 #include "block.h"
 #include "playing_field.h"
 
-struct block playing_field_spawn_random_powerup(void)
+struct block effects_powerup_spawn(void)
 {
 	int random_y = rand() % (PLAYING_FIELD_VSQUARES - peak) + peak;
 
@@ -30,4 +30,22 @@ struct block playing_field_spawn_random_powerup(void)
 	}
 
 	return (struct block){ random_x, random_y };
+}
+
+int effects_powerup_clear_lines_activate(int row_trigger)
+{
+	int nof_cleared_lines = 0;
+	int ceiling = peak > PLAYING_FIELD_VSQUARES / 2 ?
+			      peak :
+			      PLAYING_FIELD_VSQUARES / 2;
+
+	for (int row = PLAYING_FIELD_BOTTOM; row >= ceiling; row--)
+		if (row != row_trigger) {
+			playing_field_clear_row(row);
+			nof_cleared_lines++;
+		}
+
+	return nof_cleared_lines;
+
+	// playing_field_compress_empty_rows(PLAYING_FIELD_BOTTOM);
 }

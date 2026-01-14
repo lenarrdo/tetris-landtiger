@@ -3,9 +3,9 @@
 
 static void playing_field_draw_row(int row_num);
 
-void playing_field_redraw(int from_row, int nof_cleared_lines)
+void playing_field_redraw(int from_row, int to_row)
 {
-	for (int i = from_row; i >= peak - nof_cleared_lines; i--)
+	for (int i = from_row; i >= to_row; i--)
 		playing_field_draw_row(i);
 }
 

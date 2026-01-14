@@ -24,6 +24,7 @@ void playing_field_compress_empty_rows(int from_line);
 
 bool playing_field_is_empty_row(int line);
 bool playing_field_is_complete_row(int line);
+bool playing_field_is_empty(void);
 
 bool playing_field_is_occupied(int pos_x, int pos_y);
 

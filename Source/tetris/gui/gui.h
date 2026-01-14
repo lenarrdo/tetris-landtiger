@@ -33,7 +33,7 @@ void tetromino_draw(struct tetromino tetromino);
 void tetromino_hide(struct tetromino tetromino);
 
 // playing field
-void playing_field_redraw(int from_row, int nof_cleared_lines);
+void playing_field_redraw(int from_row, int to_row);
 void playing_field_redraw_block(int x, int y);
 
 // blocks

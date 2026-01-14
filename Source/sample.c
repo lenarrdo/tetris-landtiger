@@ -115,11 +115,37 @@ menu:
 
 		int cleared_lines[MAX_CLEARABLE_LINES] = { -1, -1, -1, -1 };
 		int nof_cleared_lines = 0;
+		int nof_powerup_cleared_lines = 0;
 		for (int i = 0; i < 4; i++) {
 			int curr_line = current_tetromino.blocks[i].y;
-			if (playing_field_is_complete_row(curr_line)) {
+			bool curr_line_is_complete = true;
+			bool clear_lines_activated = false;
+			bool slow_down_activated = false;
+			for (int x = 0; curr_line_is_complete &&
+					x < PLAYING_FIELD_HSQUARES;
+			     x++)
+				switch (playing_field[x][curr_line]) {
+				case HIDDEN:
+					curr_line_is_complete = false;
+					break;
+				case CLEAR_LINES_COLOR:
+					clear_lines_activated = true;
+					break;
+				case SLOW_DOWN_COLOR:
+					slow_down_activated = true;
+					break;
+				default:
+					break;
+				}
+
+			if (curr_line_is_complete) {
 				playing_field_clear_row(curr_line);
 				cleared_lines[nof_cleared_lines++] = curr_line;
+
+				if (clear_lines_activated)
+					nof_powerup_cleared_lines =
+						effects_powerup_clear_lines_activate(
+							curr_line);
 			}
 		}
 
@@ -128,23 +154,30 @@ menu:
 			score += nof_cleared_lines == MAX_CLEARABLE_LINES ?
 					 600 : // tetris!
 					 100 * nof_cleared_lines;
-			tot_cleared_lines += nof_cleared_lines;
+			tot_cleared_lines +=
+				nof_cleared_lines + nof_powerup_cleared_lines;
 
 			// redraw playing field
 			int lowest_cleared_line =
-				max(cleared_lines, MAX_CLEARABLE_LINES);
+				nof_powerup_cleared_lines > 0 ?
+					PLAYING_FIELD_BOTTOM :
+					max(cleared_lines, MAX_CLEARABLE_LINES);
+
 			playing_field_compress_empty_rows(lowest_cleared_line);
-			playing_field_redraw(lowest_cleared_line,
-					     nof_cleared_lines);
+			playing_field_redraw(
+				lowest_cleared_line,
+				peak - (nof_cleared_lines +
+					nof_powerup_cleared_lines));
 
 			// optionally spawn a new powerup
 			lines_since_last_powerup += nof_cleared_lines;
 			if (lines_since_last_powerup >= NOF_LINES_FOR_POWERUP) {
-				struct block powerup_pos =
-					playing_field_spawn_random_powerup();
-				playing_field_redraw_block(powerup_pos.x,
-							   powerup_pos.y);
-
+				if (!playing_field_is_empty()) {
+					struct block powerup_pos =
+						effects_powerup_spawn();
+					playing_field_redraw_block(
+						powerup_pos.x, powerup_pos.y);
+				}
 				lines_since_last_powerup -=
 					NOF_LINES_FOR_POWERUP;
 			}
@@ -165,6 +198,10 @@ menu:
 
 	goto menu;
 }
+
+/********************
+ * HELPER FUNCTIONS *
+ ********************/
 
 static void handle_user_input(void)
 {

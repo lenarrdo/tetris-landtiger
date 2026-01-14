@@ -9,6 +9,7 @@ enum powerup {
 	SLOW_DOWN,
 };
 
-struct block playing_field_spawn_random_powerup(void);
+struct block effects_powerup_spawn(void);
+int effects_powerup_clear_lines_activate(int row_trigger);
 
 #endif // EFFECTS_H_
