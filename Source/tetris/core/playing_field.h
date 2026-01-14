@@ -3,6 +3,7 @@
 
 #include <stdbool.h>
 
+#include "block.h"
 #include "tetromino.h"
 
 #define PLAYING_FIELD_HSQUARES 10
@@ -13,8 +14,8 @@
 #define PLAYING_FIELD_LEFT_BORDER 0
 #define PLAYING_FIELD_RIGHT_BORDER (PLAYING_FIELD_HSQUARES - 1)
 
-extern enum tetromino_color playing_field[PLAYING_FIELD_HSQUARES]
-					 [PLAYING_FIELD_VSQUARES];
+extern enum block_color playing_field[PLAYING_FIELD_HSQUARES]
+				     [PLAYING_FIELD_VSQUARES];
 extern int peak;
 
 void playing_field_reset(void);

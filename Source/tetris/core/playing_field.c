@@ -1,7 +1,6 @@
 #include "playing_field.h"
 
-enum tetromino_color playing_field[PLAYING_FIELD_HSQUARES]
-				  [PLAYING_FIELD_VSQUARES];
+enum block_color playing_field[PLAYING_FIELD_HSQUARES][PLAYING_FIELD_VSQUARES];
 int peak;
 
 static void playing_field_copy_row(int dest_line, int src_line);

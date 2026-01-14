@@ -672,6 +672,21 @@
               <FileType>5</FileType>
               <FilePath>.\Source\tetris\core\effects.h</FilePath>
             </File>
+            <File>
+              <FileName>block.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\tetris\core\block.c</FilePath>
+            </File>
+            <File>
+              <FileName>block.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\tetris\core\block.h</FilePath>
+            </File>
+            <File>
+              <FileName>block_view.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\tetris\gui\block_view.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1293,6 +1308,21 @@
               <FileName>effects.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Source\tetris\core\effects.h</FilePath>
+            </File>
+            <File>
+              <FileName>block.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\tetris\core\block.c</FilePath>
+            </File>
+            <File>
+              <FileName>block.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\tetris\core\block.h</FilePath>
+            </File>
+            <File>
+              <FileName>block_view.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\tetris\gui\block_view.c</FilePath>
             </File>
           </Files>
         </Group>

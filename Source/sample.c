@@ -9,6 +9,7 @@
 #include "tetris/core/playing_field.h"
 #include "tetris/core/tetromino.h"
 #include "tetris/core/effects.h"
+#include "tetris/core/block.h"
 #include "tetris/gui/gui.h"
 #include "timer/timer.h"
 

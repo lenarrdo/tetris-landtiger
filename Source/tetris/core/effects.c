@@ -1,7 +1,7 @@
 #include <stdlib.h>
 
 #include "effects.h"
-#include "tetromino.h"
+#include "block.h"
 #include "playing_field.h"
 
 struct block playing_field_spawn_random_powerup(void)

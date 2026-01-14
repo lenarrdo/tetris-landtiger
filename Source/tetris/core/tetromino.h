@@ -3,10 +3,9 @@
 
 #include <stdbool.h>
 
-#include "GLCD/GLCD.h"
+#include "block.h"
 
 #define NOF_TETROMINOS 7
-#define BLOCK_LEN (PLAYING_FIELD_WIDTH_PX / 10) // pixels
 
 enum tetromino_type {
 	I_TYPE,
@@ -18,17 +17,6 @@ enum tetromino_type {
 	Z_TYPE,
 };
 
-enum tetromino_color {
-	I_COLOR = Cyan,
-	O_COLOR = Yellow,
-	T_COLOR = Magenta,
-	J_COLOR = Blue,
-	L_COLOR = Orange,
-	S_COLOR = Green,
-	Z_COLOR = Red,
-	HIDDEN = Black,
-};
-
 enum tetromino_moves {
 	NONE = 0,
 	MOVE_LEFT = 1,
@@ -38,15 +26,10 @@ enum tetromino_moves {
 	HARD_DROP = 1 << 4
 };
 
-struct block {
-	int x;
-	int y;
-};
-
 struct tetromino {
 	struct block blocks[4];
 	enum tetromino_type type;
-	enum tetromino_color color;
+	enum block_color color;
 	bool placed;
 };
 
