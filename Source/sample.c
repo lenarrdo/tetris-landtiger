@@ -14,6 +14,7 @@
 #include "timer/timer.h"
 
 #define ONE_SECOND (25000000)
+#define MAX_CLEARABLE_LINES 4
 
 // ScaleFlag needs to visible in order for the emulator to find the symbol (can
 // be placed also inside system_LPC17xx.h but since it is RO, it needs more
@@ -25,6 +26,7 @@ extern uint8_t ScaleFlag;
 static void handle_user_input(void);
 static inline bool lose_conditions(void);
 static inline void enter_power_down(void);
+static inline int max(int *arr, int size);
 
 int main(void)
 {
@@ -75,6 +77,10 @@ menu:
 	enum game_state prev_game_state = PAUSED;
 	game_state = PLAYING;
 	while (game_state != GAME_OVER) {
+		/******************************************************
+		 * PART 1: TETROMINO CREATION & LOSE CONDITIONS CHECK *
+		 ******************************************************/
+
 		current_tetromino = tetromino_create(rand() % NOF_TETROMINOS,
 						     (struct block){ 3, 0 });
 		tetromino_draw(current_tetromino);
@@ -84,7 +90,10 @@ menu:
 			continue;
 		}
 
-		int prev_tot_cleared_lines = tot_cleared_lines;
+		/*************************************
+		 * PART 2: HANDLE TETROMINO MOVEMENT *
+		 *************************************/
+
 		while (!current_tetromino.placed) {
 			enter_power_down();
 			if (prev_game_state != game_state) {
@@ -97,14 +106,39 @@ menu:
 			if (game_state == PLAYING)
 				handle_user_input();
 		}
-		visualize_score();
-		int cleared_lines = tot_cleared_lines - prev_tot_cleared_lines;
-		if (cleared_lines > 0) {
-			visualize_lines();
-			playing_field_redraw(lowest_cleared_line,
-					     cleared_lines);
 
-			lines_since_last_powerup += cleared_lines;
+		/***************************************************************
+		 * PART 3: POST TETROMINO PLACEMENT STUFF (SCORE AWARDING... ) *
+		 ***************************************************************/
+
+		score += 10;
+
+		int cleared_lines[MAX_CLEARABLE_LINES] = { -1, -1, -1, -1 };
+		int nof_cleared_lines = 0;
+		for (int i = 0; i < 4; i++) {
+			int curr_line = current_tetromino.blocks[i].y;
+			if (playing_field_is_complete_row(curr_line)) {
+				playing_field_clear_row(curr_line);
+				cleared_lines[nof_cleared_lines++] = curr_line;
+			}
+		}
+
+		if (nof_cleared_lines > 0) {
+			// update stats
+			score += nof_cleared_lines == MAX_CLEARABLE_LINES ?
+					 600 : // tetris!
+					 100 * nof_cleared_lines;
+			tot_cleared_lines += nof_cleared_lines;
+
+			// redraw playing field
+			int lowest_cleared_line =
+				max(cleared_lines, MAX_CLEARABLE_LINES);
+			playing_field_compress_empty_rows(lowest_cleared_line);
+			playing_field_redraw(lowest_cleared_line,
+					     nof_cleared_lines);
+
+			// optionally spawn a new powerup
+			lines_since_last_powerup += nof_cleared_lines;
 			if (lines_since_last_powerup >= NOF_LINES_FOR_POWERUP) {
 				struct block powerup_pos =
 					playing_field_spawn_random_powerup();
@@ -114,7 +148,10 @@ menu:
 				lines_since_last_powerup -=
 					NOF_LINES_FOR_POWERUP;
 			}
+
+			visualize_lines();
 		}
+		visualize_score();
 	}
 	if (score > high_score)
 		high_score = score;
@@ -174,4 +211,13 @@ static inline void enter_power_down(void)
 	LPC_SC->PCON &= ~(1U << 1);
 
 	__asm volatile("wfi");
+}
+
+static inline int max(int *arr, int size)
+{
+	int max = arr[0];
+	for (int i = 1; i < size; i++)
+		if (arr[i] > max)
+			max = arr[i];
+	return max;
 }

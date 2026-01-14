@@ -3,12 +3,13 @@
 
 #include <stdbool.h>
 
+#include "tetromino.h"
+
 enum game_state { PAUSED, PLAYING, GAME_OVER };
 
 extern volatile int high_score;
 extern volatile int score;
 extern volatile int tot_cleared_lines;
-extern volatile int lowest_cleared_line;
 extern volatile enum game_state game_state;
 extern volatile struct tetromino current_tetromino;
 extern volatile unsigned int buffered_move;

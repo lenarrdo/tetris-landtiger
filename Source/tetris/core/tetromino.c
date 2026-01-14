@@ -1,8 +1,5 @@
 #include "tetromino.h"
 #include "playing_field.h"
-#include "stats.h"
-
-#define MAX_CLEARABLE_LINES 4
 
 static void tetromino_shift(volatile struct tetromino *tetromino,
 			    struct block vector);
@@ -136,9 +133,6 @@ void tetromino_move_down(volatile struct tetromino *tetromino)
 		    tetromino->blocks[i].y == PLAYING_FIELD_BOTTOM) {
 			playing_field_add_tetromino(tetromino);
 			tetromino->placed = true;
-			score += 10;
-
-			check_cleared_lines(tetromino);
 			return;
 		}
 
@@ -180,29 +174,6 @@ void tetromino_rotate_clockwise(volatile struct tetromino *tetromino)
  * HELPER FUNCTIONS *
  ********************/
 
-static void check_cleared_lines(volatile struct tetromino *tetromino)
-{
-	int cleared_lines[MAX_CLEARABLE_LINES] = { -1, -1, -1, -1 };
-	int nof_cleared_lines = 0;
-	for (int i = 0; i < 4; i++) {
-		int curr_line = tetromino->blocks[i].y;
-		if (playing_field_is_complete_row(curr_line)) {
-			playing_field_clear_row(curr_line);
-			cleared_lines[nof_cleared_lines++] = curr_line;
-		}
-	}
-
-	if (nof_cleared_lines > 0) {
-		score += nof_cleared_lines == MAX_CLEARABLE_LINES ?
-				 600 : // tetris!
-				 100 * nof_cleared_lines;
-		tot_cleared_lines += nof_cleared_lines;
-
-		lowest_cleared_line = max(cleared_lines, MAX_CLEARABLE_LINES);
-		playing_field_compress_empty_rows(lowest_cleared_line);
-	}
-}
-
 static void tetromino_shift(volatile struct tetromino *tetromino,
 			    struct block offset)
 {
@@ -210,13 +181,4 @@ static void tetromino_shift(volatile struct tetromino *tetromino,
 		tetromino->blocks[i].x += offset.x;
 		tetromino->blocks[i].y += offset.y;
 	}
-}
-
-static inline int max(int *arr, int size)
-{
-	int max = arr[0];
-	for (int i = 1; i < size; i++)
-		if (arr[i] > max)
-			max = arr[i];
-	return max;
 }
