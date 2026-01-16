@@ -3,17 +3,17 @@
 #include "GLCD/GLCD.h"
 #include "LPC17xx.h"
 #include "RIT/RIT.h"
+#include "adc/adc.h"
 #include "button_EXINT/button.h"
 #include "joystick/joystick.h"
-#include "tetris/core/stats.h"
-#include "tetris/core/playing_field.h"
-#include "tetris/core/tetromino.h"
-#include "tetris/core/effects.h"
 #include "tetris/core/block.h"
+#include "tetris/core/effects.h"
+#include "tetris/core/playing_field.h"
+#include "tetris/core/stats.h"
+#include "tetris/core/tetromino.h"
 #include "tetris/gui/gui.h"
 #include "timer/timer.h"
 
-#define ONE_SECOND 25000000
 #define MAX_CLEARABLE_LINES 10
 
 // ScaleFlag needs to visible in order for the emulator to find the symbol (can
@@ -41,6 +41,8 @@ int main(void)
 	enable_RIT();
 
 	joystick_init();
+
+	ADC_init();
 
 	init_timer(TIMER0, 0, 0, CONTROL_RESET | CONTROL_INTERRUPT, ONE_SECOND);
 	init_timer(TIMER0, 0, 1, CONTROL_INTERRUPT, ONE_SECOND / 2);
@@ -76,6 +78,7 @@ menu:
 
 	enable_timer(TIMER0);
 
+	unsigned int prev_tetromno_speed = ONE_SECOND;
 	enum game_state prev_game_state = PAUSED;
 	game_state = PLAYING;
 	while (game_state != GAME_OVER) {
@@ -104,6 +107,17 @@ menu:
 				else if (game_state == PLAYING)
 					hide_popup();
 				prev_game_state = game_state;
+			}
+			if (prev_tetromno_speed != current_tetromino_speed) {
+				init_timer(TIMER0, 0, 0,
+					   CONTROL_RESET | CONTROL_INTERRUPT,
+					   ONE_SECOND /
+						   current_tetromino_speed);
+				init_timer(TIMER0, 0, 1, CONTROL_INTERRUPT,
+					   ONE_SECOND /
+						   current_tetromino_speed / 2);
+
+				prev_tetromno_speed = current_tetromino_speed;
 			}
 			if (game_state == PLAYING)
 				handle_user_input();

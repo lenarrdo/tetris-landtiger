@@ -1,16 +1,19 @@
+#include <math.h>
+
 #include "LPC17xx.h"
 #include "adc.h"
+#include "tetris/core/stats.h"
 
-/*----------------------------------------------------------------------------
-  A/D IRQ: Executed when A/D Conversion is ready (signal from ADC peripheral)
- *----------------------------------------------------------------------------*/
-
-unsigned short AD_current;
-unsigned short AD_last = 0xFF; // Last converted value
+unsigned short ad_curr;
+unsigned short ad_prev = 0xFF;
 
 void ADC_IRQHandler(void)
 {
-	AD_current = ((LPC_ADC->ADGDR >> 4) & 0xFFF); // Read Conversion Result
-	if (AD_current != AD_last)
-		AD_last = AD_current;
+	ad_curr = ((LPC_ADC->ADGDR >> 4) & 0xFFF);
+	if (ad_curr != ad_prev) {
+		current_tetromino_speed =
+			round((double)ad_curr / 0xFFF * 4) + 1;
+
+		ad_prev = ad_curr;
+	}
 }

@@ -1,5 +1,6 @@
 #include "LPC17xx.h"
 #include "RIT.h"
+#include "adc/adc.h"
 #include "tetris/core/stats.h"
 #include "tetris/core/tetromino.h"
 #include "timer.h"
@@ -22,6 +23,8 @@ static inline void handle_joystick_right(void);
 
 void RIT_IRQHandler(void)
 {
+	ADC_start_conversion();
+
 	if (down_1 != 0)
 		handle_key1_press();
 
