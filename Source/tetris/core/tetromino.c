@@ -3,8 +3,6 @@
 
 static void tetromino_shift(volatile struct tetromino *tetromino,
 			    struct block vector);
-static void check_cleared_lines(volatile struct tetromino *tetromino);
-static inline int max(int *arr, int size);
 
 struct tetromino tetromino_create(enum tetromino_type type,
 				  struct block position)

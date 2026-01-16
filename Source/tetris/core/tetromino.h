@@ -42,6 +42,4 @@ void tetromino_move_down(volatile struct tetromino *tetromino);
 void tetromino_hard_drop(volatile struct tetromino *tetromino);
 void tetromino_rotate_clockwise(volatile struct tetromino *tetromino);
 
-bool is_block_out_of_bounds(struct block block);
-
 #endif // TETROMINO_H_
