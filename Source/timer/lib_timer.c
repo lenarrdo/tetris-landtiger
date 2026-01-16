@@ -409,3 +409,58 @@ void power_on_timer3(void)
 {
 	LPC_SC->PCONP |= (1 << 23); // TURN ON TIMER 3
 }
+
+void edit_timer_interval(uint8_t timer_num, uint8_t match_register,
+			 uint32_t new_timer_interval)
+{
+	switch (timer_num) {
+	case TIMER0:
+		LPC_TIM0->TCR = 0x02;
+		if (match_register == 0)
+			LPC_TIM0->MR0 = new_timer_interval;
+		else if (match_register == 1)
+			LPC_TIM0->MR1 = new_timer_interval;
+		else if (match_register == 2)
+			LPC_TIM0->MR2 = new_timer_interval;
+		else if (match_register == 3)
+			LPC_TIM0->MR3 = new_timer_interval;
+		LPC_TIM0->TCR = 0x01;
+		break;
+	case TIMER1:
+		LPC_TIM1->TCR = 0x02;
+		if (match_register == 0)
+			LPC_TIM1->MR0 = new_timer_interval;
+		else if (match_register == 1)
+			LPC_TIM1->MR1 = new_timer_interval;
+		else if (match_register == 2)
+			LPC_TIM1->MR2 = new_timer_interval;
+		else if (match_register == 3)
+			LPC_TIM1->MR3 = new_timer_interval;
+		LPC_TIM1->TCR = 0x01;
+		break;
+	case TIMER2:
+		LPC_TIM2->TCR = 0x02;
+		if (match_register == 0)
+			LPC_TIM2->MR0 = new_timer_interval;
+		else if (match_register == 1)
+			LPC_TIM2->MR1 = new_timer_interval;
+		else if (match_register == 2)
+			LPC_TIM2->MR2 = new_timer_interval;
+		else if (match_register == 3)
+			LPC_TIM2->MR3 = new_timer_interval;
+		LPC_TIM2->TCR = 0x01;
+		break;
+	case TIMER3:
+		LPC_TIM3->TCR = 0x02;
+		if (match_register == 0)
+			LPC_TIM3->MR0 = new_timer_interval;
+		else if (match_register == 1)
+			LPC_TIM3->MR1 = new_timer_interval;
+		else if (match_register == 2)
+			LPC_TIM3->MR2 = new_timer_interval;
+		else if (match_register == 3)
+			LPC_TIM3->MR3 = new_timer_interval;
+		LPC_TIM3->TCR = 0x01;
+		break;
+	}
+}

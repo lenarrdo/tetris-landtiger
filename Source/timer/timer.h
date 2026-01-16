@@ -26,6 +26,8 @@ bool is_timer_enabled(uint8_t timer_num);
 void power_on_timer2(void);
 void power_on_timer3(void);
 float get_timer_value_in_sec(uint8_t timer_num);
+void edit_timer_interval(uint8_t timer_num, uint8_t match_register,
+			 uint32_t new_timer_interval);
 
 // IRQ_timer.c
 extern void TIMER0_IRQHandler(void);

@@ -109,13 +109,13 @@ menu:
 				prev_game_state = game_state;
 			}
 			if (prev_tetromno_speed != current_tetromino_speed) {
-				init_timer(TIMER0, 0, 0,
-					   CONTROL_RESET | CONTROL_INTERRUPT,
-					   ONE_SECOND /
-						   current_tetromino_speed);
-				init_timer(TIMER0, 0, 1, CONTROL_INTERRUPT,
-					   ONE_SECOND /
-						   current_tetromino_speed / 2);
+				edit_timer_interval(
+					TIMER0, 0,
+					ONE_SECOND / current_tetromino_speed);
+				edit_timer_interval(
+					TIMER0, 1,
+					ONE_SECOND / current_tetromino_speed /
+						2);
 
 				prev_tetromno_speed = current_tetromino_speed;
 			}
