@@ -1,7 +1,7 @@
 [
   {
     "directory": "/mnt/c/Users/leonardo/Desktop/tetris-landtiger/src/Source/",
-    "command": "gcc -I./Source -I./Source/tetris/core -I./Source/tetris/gui -I./Source/CMSIS_core -I./Source/GLCD -I./Source/button_EXINT -I./Source/timer -I./Source/RIT -I./Source/joystick -I/mnt/c/Users/leonardo/AppData/Local/Arm/Packs/Keil/LPC1700_DFP/2.7.2/Device/Include -DSIMULATOR -std=c11 -Wall -Wextra -c sample.c",
+    "command": "gcc -I./Source -I./Source/tetris/core -I./Source/tetris/gui -I./Source/CMSIS_core -I./Source/GLCD -I./Source/button_EXINT -I./Source/timer -I./Source/RIT -I./Source/joystick -I./Source/adc/ -I/mnt/c/Users/leonardo/AppData/Local/Arm/Packs/Keil/LPC1700_DFP/2.7.2/Device/Include -DSIMULATOR -std=c11 -Wall -Wextra -c sample.c",
     "file": "sample.c"
   }
 ]
