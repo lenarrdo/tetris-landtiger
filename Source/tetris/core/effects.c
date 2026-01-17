@@ -1,8 +1,11 @@
 #include <stdlib.h>
 
+#include "timer/timer.h"
+
 #include "effects.h"
 #include "block.h"
 #include "playing_field.h"
+#include "stats.h"
 
 struct block effects_powerup_spawn(void)
 {
@@ -46,11 +49,19 @@ void effects_powerup_clear_lines_activate(int *cleared_lines,
 		}
 }
 
+void effects_powerup_slow_down_activate(void)
+{
+	current_tetromino_speed = 1;
+	edit_timer_interval(TIMER0, 0, ONE_SECOND);
+	edit_timer_interval(TIMER0, 1, ONE_SECOND / 2);
+	slow_down_active = true;
+}
+
 void effects_random_malus_activate(void)
 {
 	playing_field_shift_up(1);
 
 	for (int i = 0; i < PLAYING_FIELD_HSQUARES; i++)
 		if (rand() % 100 < 70)
-			playing_field[i][PLAYING_FIELD_BOTTOM] = Dark_Grey;
+			playing_field[i][PLAYING_FIELD_BOTTOM] = RANDOM_MALUS;
 }

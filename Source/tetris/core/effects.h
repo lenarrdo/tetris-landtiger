@@ -13,6 +13,7 @@ enum powerup {
 struct block effects_powerup_spawn(void);
 void effects_powerup_clear_lines_activate(int *cleared_lines,
 					  int *nof_cleared_lines);
+void effects_powerup_slow_down_activate(void);
 
 void effects_random_malus_activate(void);
 

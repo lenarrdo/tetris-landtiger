@@ -10,7 +10,7 @@ unsigned short ad_prev = 0xFF;
 void ADC_IRQHandler(void)
 {
 	ad_curr = ((LPC_ADC->ADGDR >> 4) & 0xFFF);
-	if (ad_curr != ad_prev) {
+	if (!slow_down_active && ad_curr != ad_prev) {
 		current_tetromino_speed =
 			round((double)ad_curr / 0xFFF * 4) + 1;
 

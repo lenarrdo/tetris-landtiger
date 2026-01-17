@@ -47,6 +47,8 @@ int main(void)
 	init_timer(TIMER0, 0, 0, CONTROL_RESET | CONTROL_INTERRUPT, ONE_SECOND);
 	init_timer(TIMER0, 0, 1, CONTROL_INTERRUPT, ONE_SECOND / 2);
 	init_timer(TIMER1, 0, 0, CONTROL_NULL, 0);
+	init_timer(TIMER2, 0, 0, CONTROL_RESET | CONTROL_INTERRUPT,
+		   3 * ONE_SECOND);
 
 	high_score = 0;
 
@@ -78,7 +80,7 @@ menu:
 
 	enable_timer(TIMER0);
 
-	unsigned int prev_tetromno_speed = ONE_SECOND;
+	previous_tetromino_speed = 1;
 	enum game_state prev_game_state = PAUSED;
 	game_state = PLAYING;
 	while (game_state != GAME_OVER) {
@@ -108,7 +110,11 @@ menu:
 					hide_popup();
 				prev_game_state = game_state;
 			}
-			if (prev_tetromno_speed != current_tetromino_speed) {
+			if (!slow_down_active &&
+			    previous_tetromino_speed !=
+				    current_tetromino_speed) {
+				previous_tetromino_speed =
+					current_tetromino_speed;
 				edit_timer_interval(
 					TIMER0, 0,
 					ONE_SECOND / current_tetromino_speed);
@@ -116,8 +122,6 @@ menu:
 					TIMER0, 1,
 					ONE_SECOND / current_tetromino_speed /
 						2);
-
-				prev_tetromno_speed = current_tetromino_speed;
 			}
 			if (game_state == PLAYING)
 				handle_user_input();
@@ -134,8 +138,8 @@ menu:
 		for (int i = 0; i < 4; i++) {
 			int curr_line = current_tetromino.blocks[i].y;
 			bool curr_line_is_complete = true;
-			bool clear_lines_activated = false;
-			bool slow_down_activated = false;
+			bool clear_lines_found = false;
+			bool slow_down_found = false;
 			for (int x = 0; curr_line_is_complete &&
 					x < PLAYING_FIELD_HSQUARES;
 			     x++)
@@ -144,10 +148,10 @@ menu:
 					curr_line_is_complete = false;
 					break;
 				case CLEAR_LINES_COLOR:
-					clear_lines_activated = true;
+					clear_lines_found = true;
 					break;
 				case SLOW_DOWN_COLOR:
-					slow_down_activated = true;
+					slow_down_found = true;
 					break;
 				default:
 					break;
@@ -157,10 +161,17 @@ menu:
 				playing_field_clear_row(curr_line);
 				cleared_lines[nof_cleared_lines++] = curr_line;
 
-				if (clear_lines_activated)
+				if (clear_lines_found)
 					effects_powerup_clear_lines_activate(
 						cleared_lines,
 						&nof_cleared_lines);
+
+				if (slow_down_found) {
+					previous_tetromino_speed =
+						current_tetromino_speed;
+					effects_powerup_slow_down_activate();
+					enable_timer(TIMER2);
+				}
 			}
 		}
 
