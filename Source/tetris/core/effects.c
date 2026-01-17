@@ -62,9 +62,18 @@ bool effects_random_malus_activate(void)
 	if (!playing_field_shift_up(1))
 		return false;
 
-	for (int i = 0; i < PLAYING_FIELD_HSQUARES; i++)
-		if (rand() % 100 < 70)
-			playing_field[i][PLAYING_FIELD_BOTTOM] = RANDOM_MALUS;
+	for (int x = 0; x < PLAYING_FIELD_HSQUARES; x++)
+		playing_field[x][PLAYING_FIELD_BOTTOM] = RANDOM_MALUS;
+
+	int nof_empty_blocks = 0;
+	do {
+		int randx = rand() % PLAYING_FIELD_HSQUARES;
+		if (playing_field[randx][PLAYING_FIELD_BOTTOM] ==
+		    RANDOM_MALUS) {
+			playing_field[randx][PLAYING_FIELD_BOTTOM] = HIDDEN;
+			nof_empty_blocks++;
+		}
+	} while (nof_empty_blocks < 3);
 
 	return true;
 }
