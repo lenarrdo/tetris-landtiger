@@ -42,13 +42,13 @@ void TIMER2_IRQHandler(void)
 		disable_timer(TIMER2);
 
 		edit_timer_interval(TIMER0, 0,
-				    ONE_SECOND / previous_tetromino_speed);
+				    ONE_SECOND / prev_tetromino_speed);
 		edit_timer_interval(TIMER0, 1,
-				    ONE_SECOND / previous_tetromino_speed / 2);
+				    ONE_SECOND / prev_tetromino_speed / 2);
 
-		unsigned int temp = current_tetromino_speed;
-		current_tetromino_speed = previous_tetromino_speed;
-		previous_tetromino_speed = temp;
+		unsigned int temp = curr_tetromino_speed;
+		curr_tetromino_speed = prev_tetromino_speed;
+		prev_tetromino_speed = temp;
 
 		LPC_TIM2->IR = 1;
 	} else if (LPC_TIM2->IR & 2) { // MR1

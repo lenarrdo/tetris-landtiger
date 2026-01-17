@@ -13,9 +13,9 @@ extern volatile int high_score;
 extern volatile int score;
 extern volatile int tot_cleared_lines;
 
-extern volatile struct tetromino current_tetromino;
-extern volatile unsigned int current_tetromino_speed;
-extern volatile unsigned int previous_tetromino_speed;
+extern volatile struct tetromino curr_tetromino;
+extern volatile unsigned int curr_tetromino_speed;
+extern volatile unsigned int prev_tetromino_speed;
 
 extern volatile enum game_state game_state;
 extern volatile unsigned int buffered_move;

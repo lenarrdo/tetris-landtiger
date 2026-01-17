@@ -80,7 +80,7 @@ menu:
 
 	enable_timer(TIMER0);
 
-	previous_tetromino_speed = 1;
+	prev_tetromino_speed = 1;
 	enum game_state prev_game_state = PAUSED;
 	game_state = PLAYING;
 	while (game_state != GAME_OVER) {
@@ -88,9 +88,9 @@ menu:
 		 * PART 1: TETROMINO CREATION & LOSE CONDITIONS CHECK *
 		 ******************************************************/
 
-		current_tetromino = tetromino_create(rand() % NOF_TETROMINOS,
-						     (struct block){ 3, 0 });
-		tetromino_draw(current_tetromino);
+		curr_tetromino = tetromino_create(rand() % NOF_TETROMINOS,
+						  (struct block){ 3, 0 });
+		tetromino_draw(curr_tetromino);
 
 		if (lose_conditions()) {
 			game_state = GAME_OVER;
@@ -101,7 +101,7 @@ menu:
 		 * PART 2: HANDLE TETROMINO MOVEMENT *
 		 *************************************/
 
-		while (!current_tetromino.placed) {
+		while (!curr_tetromino.placed) {
 			enter_power_down();
 			if (prev_game_state != game_state) {
 				if (game_state == PAUSED)
@@ -111,17 +111,14 @@ menu:
 				prev_game_state = game_state;
 			}
 			if (!slow_down_active &&
-			    previous_tetromino_speed !=
-				    current_tetromino_speed) {
-				previous_tetromino_speed =
-					current_tetromino_speed;
+			    prev_tetromino_speed != curr_tetromino_speed) {
+				prev_tetromino_speed = curr_tetromino_speed;
 				edit_timer_interval(
 					TIMER0, 0,
-					ONE_SECOND / current_tetromino_speed);
+					ONE_SECOND / curr_tetromino_speed);
 				edit_timer_interval(
 					TIMER0, 1,
-					ONE_SECOND / current_tetromino_speed /
-						2);
+					ONE_SECOND / curr_tetromino_speed / 2);
 			}
 			if (game_state == PLAYING)
 				handle_user_input();
@@ -136,7 +133,7 @@ menu:
 		int cleared_lines[MAX_CLEARABLE_LINES] = { 0 };
 		int nof_cleared_lines = 0;
 		for (int i = 0; i < 4; i++) {
-			int curr_line = current_tetromino.blocks[i].y;
+			int curr_line = curr_tetromino.blocks[i].y;
 			bool curr_line_is_complete = true;
 			bool clear_lines_found = false;
 			bool slow_down_found = false;
@@ -167,8 +164,8 @@ menu:
 						&nof_cleared_lines);
 
 				if (slow_down_found) {
-					previous_tetromino_speed =
-						current_tetromino_speed;
+					prev_tetromino_speed =
+						curr_tetromino_speed;
 					effects_powerup_slow_down_activate();
 					enable_timer(TIMER2);
 				}
@@ -235,36 +232,36 @@ static void handle_user_input(void)
 	if (buffered_move == NONE)
 		return;
 
-	tetromino_hide(current_tetromino);
+	tetromino_hide(curr_tetromino);
 	if (buffered_move & MOVE_LEFT) {
-		tetromino_move_left(&current_tetromino);
+		tetromino_move_left(&curr_tetromino);
 		buffered_move &= ~MOVE_LEFT;
 	}
 	if (buffered_move & MOVE_RIGHT) {
-		tetromino_move_right(&current_tetromino);
+		tetromino_move_right(&curr_tetromino);
 		buffered_move &= ~MOVE_RIGHT;
 	}
 	if (buffered_move & MOVE_DOWN) {
-		tetromino_move_down(&current_tetromino);
+		tetromino_move_down(&curr_tetromino);
 		buffered_move &= ~MOVE_DOWN;
 	}
 	if (buffered_move & ROTATE) {
-		tetromino_rotate_clockwise(&current_tetromino);
+		tetromino_rotate_clockwise(&curr_tetromino);
 		buffered_move &= ~ROTATE;
 	}
 	if (buffered_move & HARD_DROP) {
-		tetromino_hard_drop(&current_tetromino);
+		tetromino_hard_drop(&curr_tetromino);
 		buffered_move &= ~HARD_DROP;
 	}
-	tetromino_draw(current_tetromino);
+	tetromino_draw(curr_tetromino);
 }
 
 static inline bool lose_conditions(void)
 {
 	for (int i = 0; i < 4; i++)
-		if (playing_field_is_occupied(current_tetromino.blocks[i].x,
-					      current_tetromino.blocks[i].y) ||
-		    is_block_out_of_bounds(current_tetromino.blocks[i]))
+		if (playing_field_is_occupied(curr_tetromino.blocks[i].x,
+					      curr_tetromino.blocks[i].y) ||
+		    is_block_out_of_bounds(curr_tetromino.blocks[i]))
 			return true;
 	return false;
 }

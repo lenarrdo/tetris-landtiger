@@ -11,8 +11,7 @@ void ADC_IRQHandler(void)
 {
 	ad_curr = ((LPC_ADC->ADGDR >> 4) & 0xFFF);
 	if (!slow_down_active && ad_curr != ad_prev) {
-		current_tetromino_speed =
-			round((double)ad_curr / 0xFFF * 4) + 1;
+		curr_tetromino_speed = round((double)ad_curr / 0xFFF * 4) + 1;
 
 		ad_prev = ad_curr;
 	}

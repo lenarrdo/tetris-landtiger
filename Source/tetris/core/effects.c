@@ -51,7 +51,7 @@ void effects_powerup_clear_lines_activate(int *cleared_lines,
 
 void effects_powerup_slow_down_activate(void)
 {
-	current_tetromino_speed = 1;
+	curr_tetromino_speed = 1;
 	edit_timer_interval(TIMER0, 0, ONE_SECOND);
 	edit_timer_interval(TIMER0, 1, ONE_SECOND / 2);
 	slow_down_active = true;
