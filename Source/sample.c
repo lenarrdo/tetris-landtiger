@@ -200,7 +200,8 @@ menu:
 
 			lines_since_last_malus += nof_cleared_lines;
 			if (lines_since_last_malus >= NOF_LINES_RANDOM_MALUS) {
-				effects_random_malus_activate();
+				if (!effects_random_malus_activate())
+					game_state = GAME_OVER;
 				playing_field_redraw(PLAYING_FIELD_BOTTOM,
 						     peak);
 

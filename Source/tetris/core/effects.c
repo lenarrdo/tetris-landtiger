@@ -57,11 +57,14 @@ void effects_powerup_slow_down_activate(void)
 	slow_down_active = true;
 }
 
-void effects_random_malus_activate(void)
+bool effects_random_malus_activate(void)
 {
-	playing_field_shift_up(1);
+	if (!playing_field_shift_up(1))
+		return false;
 
 	for (int i = 0; i < PLAYING_FIELD_HSQUARES; i++)
 		if (rand() % 100 < 70)
 			playing_field[i][PLAYING_FIELD_BOTTOM] = RANDOM_MALUS;
+
+	return true;
 }

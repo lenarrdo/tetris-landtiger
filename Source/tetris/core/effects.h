@@ -1,6 +1,8 @@
 #ifndef EFFECTS_H_
 #define EFFECTS_H_
 
+#include <stdbool.h>
+
 #define NOF_POWERUPS 2
 #define NOF_LINES_FOR_POWERUP 5
 #define NOF_LINES_RANDOM_MALUS 10
@@ -15,6 +17,6 @@ void effects_powerup_clear_lines_activate(int *cleared_lines,
 					  int *nof_cleared_lines);
 void effects_powerup_slow_down_activate(void);
 
-void effects_random_malus_activate(void);
+bool effects_random_malus_activate(void);
 
 #endif // EFFECTS_H_
