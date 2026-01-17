@@ -77,6 +77,7 @@ bool playing_field_shift_up(int nof_blocks)
 
 	for (int row = 1; row <= PLAYING_FIELD_VSQUARES; row++)
 		playing_field_copy_row(row - nof_blocks, row);
+	playing_field_clear_row(PLAYING_FIELD_BOTTOM);
 
 	peak--;
 
