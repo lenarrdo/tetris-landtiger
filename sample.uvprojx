@@ -605,8 +605,48 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>tetris</GroupName>
+          <GroupName>adc</GroupName>
           <Files>
+            <File>
+              <FileName>adc.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\adc\adc.h</FilePath>
+            </File>
+            <File>
+              <FileName>IRQ_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\adc\IRQ_adc.c</FilePath>
+            </File>
+            <File>
+              <FileName>lib_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\adc\lib_adc.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>tetris-core</GroupName>
+          <Files>
+            <File>
+              <FileName>block.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\tetris\core\block.c</FilePath>
+            </File>
+            <File>
+              <FileName>block.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\tetris\core\block.h</FilePath>
+            </File>
+            <File>
+              <FileName>effects.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\tetris\core\effects.c</FilePath>
+            </File>
+            <File>
+              <FileName>effects.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\tetris\core\effects.h</FilePath>
+            </File>
             <File>
               <FileName>playing_field.c</FileName>
               <FileType>1</FileType>
@@ -637,6 +677,16 @@
               <FileType>5</FileType>
               <FilePath>.\Source\tetris\core\tetromino.h</FilePath>
             </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>tetris-gui</GroupName>
+          <Files>
+            <File>
+              <FileName>block_view.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\tetris\gui\block_view.c</FilePath>
+            </File>
             <File>
               <FileName>gui.h</FileName>
               <FileType>5</FileType>
@@ -662,50 +712,25 @@
               <FileType>1</FileType>
               <FilePath>.\Source\tetris\gui\tetromino_view.c</FilePath>
             </File>
-            <File>
-              <FileName>effects.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\tetris\core\effects.c</FilePath>
-            </File>
-            <File>
-              <FileName>effects.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\tetris\core\effects.h</FilePath>
-            </File>
-            <File>
-              <FileName>block.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\tetris\core\block.c</FilePath>
-            </File>
-            <File>
-              <FileName>block.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\tetris\core\block.h</FilePath>
-            </File>
-            <File>
-              <FileName>block_view.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\tetris\gui\block_view.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>adc</GroupName>
+          <GroupName>tetris-music</GroupName>
           <Files>
             <File>
-              <FileName>adc.h</FileName>
+              <FileName>music.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\tetris\music\music.c</FilePath>
+            </File>
+            <File>
+              <FileName>music.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\Source\adc\adc.h</FilePath>
+              <FilePath>.\Source\tetris\music\music.h</FilePath>
             </File>
             <File>
-              <FileName>IRQ_adc.c</FileName>
+              <FileName>music_themes.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Source\adc\IRQ_adc.c</FilePath>
-            </File>
-            <File>
-              <FileName>lib_adc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\adc\lib_adc.c</FilePath>
+              <FilePath>.\Source\tetris\music\music_themes.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1262,8 +1287,48 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>tetris</GroupName>
+          <GroupName>adc</GroupName>
           <Files>
+            <File>
+              <FileName>adc.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\adc\adc.h</FilePath>
+            </File>
+            <File>
+              <FileName>IRQ_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\adc\IRQ_adc.c</FilePath>
+            </File>
+            <File>
+              <FileName>lib_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\adc\lib_adc.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>tetris-core</GroupName>
+          <Files>
+            <File>
+              <FileName>block.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\tetris\core\block.c</FilePath>
+            </File>
+            <File>
+              <FileName>block.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\tetris\core\block.h</FilePath>
+            </File>
+            <File>
+              <FileName>effects.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\tetris\core\effects.c</FilePath>
+            </File>
+            <File>
+              <FileName>effects.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\tetris\core\effects.h</FilePath>
+            </File>
             <File>
               <FileName>playing_field.c</FileName>
               <FileType>1</FileType>
@@ -1294,6 +1359,16 @@
               <FileType>5</FileType>
               <FilePath>.\Source\tetris\core\tetromino.h</FilePath>
             </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>tetris-gui</GroupName>
+          <Files>
+            <File>
+              <FileName>block_view.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\tetris\gui\block_view.c</FilePath>
+            </File>
             <File>
               <FileName>gui.h</FileName>
               <FileType>5</FileType>
@@ -1319,50 +1394,25 @@
               <FileType>1</FileType>
               <FilePath>.\Source\tetris\gui\tetromino_view.c</FilePath>
             </File>
-            <File>
-              <FileName>effects.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\tetris\core\effects.c</FilePath>
-            </File>
-            <File>
-              <FileName>effects.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\tetris\core\effects.h</FilePath>
-            </File>
-            <File>
-              <FileName>block.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\tetris\core\block.c</FilePath>
-            </File>
-            <File>
-              <FileName>block.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\tetris\core\block.h</FilePath>
-            </File>
-            <File>
-              <FileName>block_view.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\tetris\gui\block_view.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>adc</GroupName>
+          <GroupName>tetris-music</GroupName>
           <Files>
             <File>
-              <FileName>adc.h</FileName>
+              <FileName>music.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\tetris\music\music.c</FilePath>
+            </File>
+            <File>
+              <FileName>music.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\Source\adc\adc.h</FilePath>
+              <FilePath>.\Source\tetris\music\music.h</FilePath>
             </File>
             <File>
-              <FileName>IRQ_adc.c</FileName>
+              <FileName>music_themes.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Source\adc\IRQ_adc.c</FilePath>
-            </File>
-            <File>
-              <FileName>lib_adc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\adc\lib_adc.c</FilePath>
+              <FilePath>.\Source\tetris\music\music_themes.c</FilePath>
             </File>
           </Files>
         </Group>
