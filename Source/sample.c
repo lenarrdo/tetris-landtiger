@@ -82,6 +82,7 @@ menu:
 	reset_timer(TIMER1);
 
 	// reuse TIMER1 to play music theme
+	curr_audio_track = A_TYPE_THEME;
 	init_timer(TIMER1, 0, 0, CONTROL_INTERRUPT | CONTROL_RESET, ONE_SECOND);
 	enable_timer(TIMER1);
 
@@ -180,6 +181,9 @@ menu:
 		}
 
 		if (nof_cleared_lines > 0) {
+			// play sound effect
+			curr_audio_track = SFX_CLEAR_LINES;
+
 			// update stats
 			score += compute_line_clear_points(nof_cleared_lines);
 			tot_cleared_lines += nof_cleared_lines;

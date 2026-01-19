@@ -2,13 +2,12 @@
 #define MUSIC_H_
 
 #include <stdbool.h>
-#include <stdint.h>
 
 #include "tetris/core/stats.h"
 
-// #define FREQUENCY_SCALER 0.3
 #define SLOWDOWN 2
 #define NOF_NOTES_A_TYPE 41
+#define NOF_NOTES_SFX_CLEAR_LINES 1
 
 enum note_duration {
 	semibiscroma = (unsigned int)(ONE_SECOND * SLOWDOWN / 64.0f),
@@ -66,17 +65,31 @@ enum note_frequency {
 	PAUSE = 0
 };
 
+enum audio_track {
+	NO_AUDIO,
+	A_TYPE_THEME,
+	SFX_CLEAR_LINES,
+};
+
 struct note {
 	enum note_frequency freq;
 	enum note_duration duration;
 };
 
-extern volatile struct note a_type_theme[NOF_NOTES_A_TYPE];
 extern volatile int music_tick;
-extern volatile int current_note;
+extern volatile int curr_music_note;
+extern volatile int curr_sfx_note;
+extern volatile enum audio_track curr_audio_track;
 
-void music_init(void);
+// audio tracks
+extern volatile struct note a_type_theme[NOF_NOTES_A_TYPE];
+extern volatile struct note sfx_clear_lines[NOF_NOTES_SFX_CLEAR_LINES];
+
 void set_note(struct note note);
 void play_note(void);
+
+void music_init(void);
+void music_pause(void);
+void music_play(void);
 
 #endif // MUSIC_H_

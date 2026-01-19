@@ -732,6 +732,11 @@
               <FileType>1</FileType>
               <FilePath>.\Source\tetris\music\music_themes.c</FilePath>
             </File>
+            <File>
+              <FileName>sound_effects.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\tetris\music\sound_effects.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1413,6 +1418,11 @@
               <FileName>music_themes.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Source\tetris\music\music_themes.c</FilePath>
+            </File>
+            <File>
+              <FileName>sound_effects.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\tetris\music\sound_effects.c</FilePath>
             </File>
           </Files>
         </Group>

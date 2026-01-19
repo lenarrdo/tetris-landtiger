@@ -9,7 +9,9 @@ volatile int sine_table[45] = { 410, 467, 523, 576, 627, 673, 714, 749, 778,
 				169, 125, 87,  55,  30,	 12,  2,   0,	6,
 				20,  41,  70,  105, 146, 193, 243, 297, 353 };
 volatile int music_tick = 0;
-volatile int current_note = 0;
+volatile int curr_music_note = 0;
+volatile int curr_sfx_note = 0;
+volatile enum audio_track curr_audio_track = NO_AUDIO;
 
 void set_note(struct note note)
 {
@@ -31,4 +33,18 @@ void music_init(void)
 	LPC_PINCON->PINSEL1 |= (1 << 21);
 	LPC_PINCON->PINSEL1 &= ~(1 << 20);
 	LPC_GPIO0->FIODIR |= (1 << 26);
+}
+
+void music_pause(void)
+{
+	disable_timer(TIMER1);
+	disable_timer(TIMER3);
+	curr_audio_track = NO_AUDIO;
+}
+
+void music_play(void)
+{
+	enable_timer(TIMER1);
+	enable_timer(TIMER3);
+	curr_audio_track = A_TYPE_THEME;
 }

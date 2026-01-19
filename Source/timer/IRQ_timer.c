@@ -26,17 +26,42 @@ void TIMER1_IRQHandler(void)
 {
 	// MR0
 	if (LPC_TIM1->IR & 1) {
-		set_note(a_type_theme[current_note]);
+		switch (curr_audio_track) {
+		case A_TYPE_THEME:
+			set_note(a_type_theme[curr_music_note]);
 
-		disable_timer(TIMER1);
-		reset_timer(TIMER1);
-		init_timer(TIMER1, 0, 0, CONTROL_RESET | CONTROL_INTERRUPT,
-			   a_type_theme[current_note].duration);
-		enable_timer(TIMER1);
-		current_note++;
+			disable_timer(TIMER1);
+			reset_timer(TIMER1);
+			init_timer(TIMER1, 0, 0,
+				   CONTROL_RESET | CONTROL_INTERRUPT,
+				   a_type_theme[curr_music_note].duration);
+			enable_timer(TIMER1);
+			curr_music_note++;
 
-		if (current_note == NOF_NOTES_A_TYPE)
-			current_note = 0;
+			if (curr_music_note == NOF_NOTES_A_TYPE)
+				curr_music_note = 0;
+			break;
+		case SFX_CLEAR_LINES:
+			set_note(sfx_clear_lines[curr_sfx_note]);
+
+			disable_timer(TIMER1);
+			reset_timer(TIMER1);
+			init_timer(TIMER1, 0, 0,
+				   CONTROL_RESET | CONTROL_INTERRUPT,
+				   sfx_clear_lines[curr_sfx_note].duration);
+			enable_timer(TIMER1);
+			curr_sfx_note++;
+
+			// sound effect has finished playing, resume to music theme
+			if (curr_sfx_note == NOF_NOTES_SFX_CLEAR_LINES) {
+				curr_sfx_note = 0;
+				curr_audio_track = A_TYPE_THEME;
+			}
+			break;
+		case NO_AUDIO:
+			break;
+		}
+
 		LPC_TIM1->IR = 1;
 	} else if (LPC_TIM1->IR & 2) { // MR1
 		LPC_TIM1->IR = 2;
