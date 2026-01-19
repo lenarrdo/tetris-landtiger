@@ -62,6 +62,8 @@ void TIMER2_IRQHandler(void)
 		curr_tetromino_speed = prev_tetromino_speed;
 		prev_tetromino_speed = temp;
 
+		slow_down_active = false;
+
 		LPC_TIM2->IR = 1;
 	} else if (LPC_TIM2->IR & 2) { // MR1
 		LPC_TIM2->IR = 2;
