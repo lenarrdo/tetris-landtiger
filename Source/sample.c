@@ -82,9 +82,8 @@ menu:
 	reset_timer(TIMER1);
 
 	// reuse TIMER1 to play music theme
-	curr_audio_track = A_TYPE_THEME;
 	init_timer(TIMER1, 0, 0, CONTROL_INTERRUPT | CONTROL_RESET, ONE_SECOND);
-	enable_timer(TIMER1);
+	music_play();
 
 	enable_timer(TIMER0);
 
@@ -112,10 +111,13 @@ menu:
 		while (!curr_tetromino.placed) {
 			enter_power_down();
 			if (prev_game_state != game_state) {
-				if (game_state == PAUSED)
+				if (game_state == PAUSED) {
 					show_paused_popup();
-				else if (game_state == PLAYING)
+					music_pause();
+				} else if (game_state == PLAYING) {
 					hide_popup();
+					music_play();
+				}
 				prev_game_state = game_state;
 			}
 			if (!slow_down_active &&
@@ -227,6 +229,9 @@ menu:
 
 	disable_timer(TIMER0);
 	reset_timer(TIMER0);
+
+	music_pause();
+	music_reset();
 
 	show_game_over_popup();
 	while (game_state == GAME_OVER)

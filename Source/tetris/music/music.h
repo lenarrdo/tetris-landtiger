@@ -91,5 +91,6 @@ void play_note(void);
 void music_init(void);
 void music_pause(void);
 void music_play(void);
+void music_reset(void);
 
 #endif // MUSIC_H_

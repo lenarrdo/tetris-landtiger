@@ -48,3 +48,14 @@ void music_play(void)
 	enable_timer(TIMER3);
 	curr_audio_track = A_TYPE_THEME;
 }
+
+void music_reset(void)
+{
+	reset_timer(TIMER1);
+	reset_timer(TIMER3);
+
+	music_tick = 0;
+	curr_music_note = 0;
+	curr_sfx_note = 0;
+	curr_audio_track = NO_AUDIO;
+}
