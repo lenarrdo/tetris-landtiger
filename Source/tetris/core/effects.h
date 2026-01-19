@@ -6,6 +6,7 @@
 #define NOF_POWERUPS 2
 #define NOF_LINES_FOR_POWERUP 5
 #define NOF_LINES_RANDOM_MALUS 10
+#define SLOW_DOWN_DURATION 15
 
 enum powerup {
 	CLEAR_LINES,

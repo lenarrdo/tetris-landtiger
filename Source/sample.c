@@ -48,7 +48,7 @@ int main(void)
 	init_timer(TIMER0, 0, 1, CONTROL_INTERRUPT, ONE_SECOND / 2);
 	init_timer(TIMER1, 0, 0, CONTROL_NULL, 0);
 	init_timer(TIMER2, 0, 0, CONTROL_RESET | CONTROL_INTERRUPT,
-		   3 * ONE_SECOND);
+		   SLOW_DOWN_DURATION * ONE_SECOND);
 
 	high_score = 0;
 
