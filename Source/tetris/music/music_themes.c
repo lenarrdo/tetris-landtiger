@@ -1,6 +1,6 @@
 #include "music.h"
 
-struct note a_type_theme[NOF_NOTES_A_TYPE] = {
+volatile struct note a_type_theme[NOF_NOTES_A_TYPE] = {
 	// pt.1
 	{ E3, semiminima },
 	{ B2, croma },

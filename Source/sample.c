@@ -12,6 +12,7 @@
 #include "tetris/core/stats.h"
 #include "tetris/core/tetromino.h"
 #include "tetris/gui/gui.h"
+#include "tetris/music/music.h"
 #include "timer/timer.h"
 
 #define MAX_CLEARABLE_LINES 10
@@ -43,6 +44,8 @@ int main(void)
 	joystick_init();
 
 	ADC_init();
+
+	music_init();
 
 	init_timer(TIMER0, 0, 0, CONTROL_RESET | CONTROL_INTERRUPT, ONE_SECOND);
 	init_timer(TIMER0, 0, 1, CONTROL_INTERRUPT, ONE_SECOND / 2);
@@ -77,6 +80,10 @@ menu:
 	srand(get_timer_value(TIMER1));
 	disable_timer(TIMER1);
 	reset_timer(TIMER1);
+
+	// reuse TIMER1 to play music theme
+	init_timer(TIMER1, 0, 0, CONTROL_INTERRUPT | CONTROL_RESET, ONE_SECOND);
+	enable_timer(TIMER1);
 
 	enable_timer(TIMER0);
 

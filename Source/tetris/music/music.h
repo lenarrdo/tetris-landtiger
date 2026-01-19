@@ -4,19 +4,20 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+#include "tetris/core/stats.h"
+
 // #define FREQUENCY_SCALER 0.3
 #define SLOWDOWN 2
-#define SECOND 25000000
 #define NOF_NOTES_A_TYPE 41
 
 enum note_duration {
-	semibiscroma = (unsigned int)(SECOND * SLOWDOWN / 64.0f),
-	biscroma = (unsigned int)(SECOND * SLOWDOWN / 32.0f),
-	semicroma = (unsigned int)(SECOND * SLOWDOWN / 16.0f),
-	croma = (unsigned int)(SECOND * SLOWDOWN / 8.0f),
-	semiminima = (unsigned int)(SECOND * SLOWDOWN / 4.0f),
-	minima = (unsigned int)(SECOND * SLOWDOWN / 2.0f),
-	semibreve = (unsigned int)(SECOND * SLOWDOWN),
+	semibiscroma = (unsigned int)(ONE_SECOND * SLOWDOWN / 64.0f),
+	biscroma = (unsigned int)(ONE_SECOND * SLOWDOWN / 32.0f),
+	semicroma = (unsigned int)(ONE_SECOND * SLOWDOWN / 16.0f),
+	croma = (unsigned int)(ONE_SECOND * SLOWDOWN / 8.0f),
+	semiminima = (unsigned int)(ONE_SECOND * SLOWDOWN / 4.0f),
+	minima = (unsigned int)(ONE_SECOND * SLOWDOWN / 2.0f),
+	semibreve = (unsigned int)(ONE_SECOND * SLOWDOWN),
 };
 
 enum note_frequency {
@@ -70,11 +71,11 @@ struct note {
 	enum note_duration duration;
 };
 
-extern uint16_t sine_table[45];
-extern struct note a_type_theme[NOF_NOTES_A_TYPE];
-extern int music_tick;
-extern int current_note;
+extern volatile struct note a_type_theme[NOF_NOTES_A_TYPE];
+extern volatile int music_tick;
+extern volatile int current_note;
 
+void music_init(void);
 void set_note(struct note note);
 void play_note(void);
 
