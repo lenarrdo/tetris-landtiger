@@ -15,7 +15,7 @@
 #include "tetris/music/music.h"
 #include "timer/timer.h"
 
-#define MAX_CLEARABLE_LINES 10
+#define MAX_CLEARABLE_LINES 14
 
 // ScaleFlag needs to visible in order for the emulator to find the symbol (can
 // be placed also inside system_LPC17xx.h but since it is RO, it needs more
