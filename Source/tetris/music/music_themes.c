@@ -22,7 +22,7 @@ volatile struct note a_type_theme[NOF_NOTES_A_TYPE] = {
 	{ C3, semiminima },
 	{ A2, semiminima },
 	{ A2, semiminima },
-	{ A2, semiminima }, // FIXME: should be PAUSE instead of A2
+	{ A2, semiminima },
 
 	// pt.2
 	{ D3, semiminima },
@@ -44,5 +44,5 @@ volatile struct note a_type_theme[NOF_NOTES_A_TYPE] = {
 	{ C3, semiminima },
 	{ A2, semiminima },
 	{ A2, semiminima },
-	{ A2, semiminima } // FIXME: this should also be a PAUSE.
+	{ A2, semiminima }
 };

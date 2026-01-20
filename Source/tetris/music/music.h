@@ -7,7 +7,7 @@
 
 #define SLOWDOWN 2
 #define NOF_NOTES_A_TYPE 41
-#define NOF_NOTES_SFX_CLEAR_LINES 1
+#define NOF_NOTES_SFX_CLEAR_LINES 3
 
 enum note_duration {
 	semibiscroma = (unsigned int)(ONE_SECOND * SLOWDOWN / 64.0f),

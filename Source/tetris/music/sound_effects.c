@@ -1,5 +1,7 @@
 #include "music.h"
 
 volatile struct note sfx_clear_lines[NOF_NOTES_SFX_CLEAR_LINES] = {
-	{ C5, semicroma },
+	{ A4, semicroma },
+	{ C4, semicroma },
+	{ E4, semicroma },
 };
